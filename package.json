@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.2"
+  },
+  "name": "portal-system",
+  "version": "1.0.0",
+  "description": "Portal system application Mobifone",
+  "main": "server.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/epuseca/portalSystemMBF.git"
+  },
+  "keywords": [
+    "gialoc"
+  ],
+  "author": "GiaLocMBF",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/epuseca/portalSystemMBF/issues"
+  },
+  "homepage": "https://github.com/epuseca/portalSystemMBF#readme"
+}
