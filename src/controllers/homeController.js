@@ -1,10 +1,9 @@
-const getHomePage = (req, res) => {
-    res.send('Hello World! va nodemon ss')
-}
-const getRenderPic = (req, res) => {
-    res.render('sample.ejs');
-}
+
 module.exports = {
-    getHomePage,
-    getRenderPic
+    getHomePage: (req, res) => {
+        res.send('Hello World! va nodemon ss')
+    },
+    getRenderPic: (req, res) => {
+        res.render('home/home.ejs');
+    }
 }
