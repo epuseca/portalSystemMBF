@@ -1,0 +1,107 @@
+footer {
+    background-color: #004A90; /* Màu xanh dương đậm */
+    color: #ffffff; /* Màu chữ trắng */
+    padding: 20px 0; /* Khoảng cách trên và dưới */
+  }
+  
+  .container {
+    max-width: 960px; /* Độ rộng tối đa của nội dung */
+    margin: 0 auto; /* Căn giữa nội dung */
+    padding: 0 20px; /* Khoảng cách trái và phải */
+  }
+  
+  .footer-sections {
+    display: flex; /* Sắp xếp các phần tử con theo hàng ngang */
+    flex-wrap: wrap; /* Cho phép các phần tử xuống dòng khi không đủ chỗ */
+    justify-content: space-between; /* Khoảng cách đều giữa các phần tử */
+    margin-bottom: 20px; /* Khoảng cách với phần footer-bottom */
+  }
+  
+  .footer-section {
+    width: 23%; /* Chiều rộng của mỗi phần (có thể điều chỉnh) */
+  }
+  
+  .footer-section h3 {
+    font-size: 16px; /* Kích thước tiêu đề */
+    margin-bottom: 10px; /* Khoảng cách dưới tiêu đề */
+  }
+  
+  .footer-section ul {
+    list-style: none; /* Loại bỏ dấu chấm đầu dòng */
+    padding: 0;
+  }
+  
+  .footer-section li {
+    margin-bottom: 5px; /* Khoảng cách giữa các mục */
+  }
+  
+  .footer-section a {
+    background-color: #ffffff00; /* Màu chữ trắng */
+    color: #ffffff; /* Màu chữ trắng */
+    text-decoration: none; /* Loại bỏ gạch chân */
+    font-weight: 200;
+  }
+  
+  .contact-info p {
+    display: flex; /* Sắp xếp biểu tượng và nội dung trên cùng dòng */
+    align-items: flex-start; /* Căn chỉnh nội dung lên trên */
+    margin-bottom: 10px; /* Khoảng cách giữa các mục liên hệ */
+  }
+  
+  .contact-info span {
+    display: inline-block; /* Hiển thị biểu tượng dạng khối */
+    width: 20px; /* Chiều rộng của biểu tượng */
+    height: 20px; /* Chiều cao của biểu tượng */
+    margin-right: 5px; /* Khoảng cách bên phải biểu tượng */
+    background-repeat: no-repeat; /* Không lặp lại hình nền */
+    background-position: center; /* Căn giữa hình nền */
+  }
+  
+  .address-icon {
+    background-image: url("images/address-icon.png"); /* Đường dẫn đến biểu tượng địa chỉ */
+  }
+  
+  .email-icon {
+    background-image: url("images/email-icon.png"); /* Đường dẫn đến biểu tượng email */
+  }
+  
+  .phone-icon {
+    background-image: url("images/phone-icon.png"); /* Đường dẫn đến biểu tượng điện thoại */
+  }
+  
+  .hotline-icon {
+    background-image: url("images/hotline-icon.png"); /* Đường dẫn đến biểu tượng hotline */
+  }
+  
+  .footer-bottom {
+    display: flex; /* Sắp xếp các phần tử con theo hàng ngang */
+    justify-content: space-between; /* Khoảng cách đều giữa các phần tử */
+    align-items: center; /* Căn giữa các phần tử theo chiều dọc */
+  }
+  
+  .footer-bottom p {
+    font-size: 14px; /* Kích thước chữ nhỏ */
+  }
+  
+  .social-icons a {
+    display: inline-block; /* Hiển thị biểu tượng dạng khối */
+    width: 30px; /* Chiều rộng của biểu tượng */
+    height: 30px; /* Chiều cao của biểu tượng */
+    margin-left: 10px; /* Khoảng cách bên trái biểu tượng */
+    background-color: #ffffff; /* Màu nền trắng */
+    border-radius: 50%; /* Hình tròn */
+    background-repeat: no-repeat; /* Không lặp lại hình nền */
+    background-position: center; /* Căn giữa hình nền */
+  }
+  
+  .social-icons a:first-child {
+    background-image: url("images/facebook-icon.png"); /* Đường dẫn đến biểu tượng Facebook */
+  }
+  
+  .social-icons a:nth-child(2) {
+    background-image: url("images/twitter-icon.png"); /* Đường dẫn đến biểu tượng Twitter */
+  }
+  
+  .social-icons a:last-child {
+    background-image: url("images/instagram-icon.png"); /* Đường dẫn đến biểu tượng Instagram */
+  }

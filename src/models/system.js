@@ -5,7 +5,7 @@ const mongoose_delete = require('mongoose-delete');
 const systemSchema = new mongoose.Schema(
     {
         name: { type: String, required: true },
-        systemId: { type: String, required: true },
+        idSystem: { type: String, required: true },
         image: { type: String, required: false },
         description: String,
         tagNv: String,

@@ -5,10 +5,13 @@ const path = require('path')
 const configViewEngine = require('./config/viewEngine.js')
 const webRoutes = require('./routes/web.js')
 const connection = require('./config/database');
+const cookieParser = require('cookie-parser');
 
 const app = express() // tạo express application
 const port = process.env.PORT // init port
 const hostname = process.env.HOST_NAME  // init port
+
+app.use(cookieParser());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -16,6 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 configViewEngine(app);
 
 app.use('/', webRoutes);
+
 
 
 (async () => {

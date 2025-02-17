@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/css/home/topnav_slideshow.css">
     <link rel="stylesheet" href="/css/home/login.css">
     <link rel="stylesheet" href="/css/home/list_system.css">
+    <link rel="stylesheet" href="/css/home/footer.css">
     <script src="/scripts/sidebar.js"></script>
     <script src="/scripts/navbar.js"></script>
 
@@ -63,43 +64,50 @@
 
         <!-- <input class="search_info" type="text" placeholder="Search.."> -->
         <div class="menu-right">
-            <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;"><a style="color: #2b7dcf; font-size: 17px;
-    font-weight: bold;" href="#login">Đăng nhập</a></button>
 
-            <div id="id01" class="modal">
+            <% if (isLoggedIn) { %>
+                <!-- Nếu đã đăng nhập, hiển thị link Đăng xuất -->
+                <a href="/logout" style="color: #2b7dcf; font-size: 17px; font-weight: bold;">Đăng xuất</a>
+                <% } else { %>
+                    <!-- Nếu chưa đăng nhập, hiển thị nút đăng nhập (mở modal) -->
+                    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">
+                        <a style="color: #2b7dcf; font-size: 17px; font-weight: bold;" href="#login">Đăng nhập</a>
+                    </button>
+                    <% } %>
+                        <div id="id01" class="modal">
 
-                <form class="modal-content animate" action="/login" method="POST">
-                    <div class="imgcontainer">
-                        <span onclick="document.getElementById('id01').style.display='none'" class="close"
-                            title="Close Modal">&times;</span>
-                        <img src="/images/Su-menh.jpg" alt="Avatar" class="avatar">
-                    </div>
+                            <form class="modal-content animate" action="/login" method="POST">
+                                <div class="imgcontainer">
+                                    <span onclick="document.getElementById('id01').style.display='none'" class="close"
+                                        title="Close Modal">&times;</span>
+                                    <img src="/images/Su-menh.jpg" alt="Avatar" class="avatar">
+                                </div>
 
-                    <div class="container">
-                        <label style="color: black;" for="uname"><b>Username</b></label>
-                        <input type="text_uname" placeholder="Enter Username" name="username" required>
+                                <div class="container">
+                                    <label style="color: black;" for="username"><b>Username</b></label>
+                                    <input type="text_uname" placeholder="Enter Username" name="username" required>
 
-                        <label style="color: black;" for="psw"><b>Password</b></label>
-                        <input type="password" placeholder="Enter Password" name="password" required>
+                                    <label style="color: black;" for="password"><b>Password</b></label>
+                                    <input type="password" placeholder="Enter Password" name="password" required>
 
-                        <button style="background-color: #2b7dcf;" type="submit">Login</button>
-                        <label style="color: black;">
-                            <input type="checkbox" checked="checked" name="remember"> Remember me
-                        </label>
-                    </div>
+                                    <button style="background-color: #2b7dcf;" type="submit">Login</button>
+                                    <label style="color: black;">
+                                        <input type="checkbox" checked="checked" name="remember"> Remember me
+                                    </label>
+                                </div>
 
-                    <div class="container" style="background-color:#f1f1f1">
-                        <button type="button" onclick="document.getElementById('id01').style.display='none'"
-                            class="cancelbtn">Cancel</button>
-                        <span class="psw"> <a style="color: black;" href="#">Forgot password?</a></span>
-                    </div>
-                </form>
-            </div>
-            <div class="hamburger" onclick="toggleMobileMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+                                <div class="container" style="background-color:#f1f1f1">
+                                    <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                                        class="cancelbtn">Cancel</button>
+                                    <span class="psw"> <a style="color: black;" href="#">Forgot password?</a></span>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="hamburger" onclick="toggleMobileMenu()">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
         </div>
 
 
@@ -162,149 +170,115 @@
                 <span class="dot" onclick="currentSlide(3)"></span>
             </div>
             <!-- test list user -->
-            <div>
-                <table>
-                    <tr>
-                        <th>ID</th>
-                        <th>Email</th>
-                        <th>Name</th>
-                    </tr>
-                    <% for(let i=0; i < listUsers.length; i++){%>
-
-
-                        <tr>
-                            <td>
-                                <%= listUsers[i].id %>
-                            </td>
-                            <td>
-                                <%= listUsers[i].email %>
-                            </td>
-                            <td>
-                                <%= listUsers[i].name %>
-                            </td>
-                        </tr>
-                        
-                        <%} %>
-                </table>
-            </div>
-
             <h2 class="title-hethong">Hệ thống</h2>
-            <div class="row_card">
-                <div class="column">
-                    <div class="card">
-                        <img src="/images/Tam-nhin.jpg" alt="Header Image" class="header-image">
-                        <h3>Hệ thống: hệ thống 1</h3>
-                        <p class="text-p">Tài liệu hướng dẫn:
-                            <a class="link-tailieu" href="https://www.youtube.com/">tlhd.com.vn</a>
-                        </p>
-                        <p class="text-p">Đơn vị chủ quản: Giải phá dịch vụ viễn thông</p>
-                        <p class="text-p">Đầu mối quản trị: ...</p>
-                        <br>
-                        <a href="https://www.facebook.com/" class="link-system">
-                            Link truy cập: hethong1.com.vn
-                        </a>
-                    </div>
-                </div>
 
-                <div class="column">
-                    <div class="card">
-                        <img src="/images/Tam-nhin.jpg" alt="Header Image" class="header-image">
-                        <h3>Hệ thống: hệ thống 2</h3>
-                        <p class="text-p">Tài liệu hướng dẫn:
-                            <a class="link-tailieu" href="https://www.youtube.com/">tlhd.com.vn</a>
-                        </p>
-                        <p class="text-p">Đơn vị chủ quản: Giải phá dịch vụ viễn thông</p>
-                        <p class="text-p">Đầu mối quản trị: ...</p>
-                        <br>
-                        <a href="https://www.facebook.com/" class="link-system">
-                            Link truy cập: hethong1.com.vn
-                        </a>
-                    </div>
+            <% if(listSystems && listSystems.length> 0) { %>
+                <!-- Dùng Flexbox, CSS tự động xuống dòng sau 3 card -->
+                <div class="row_card">
+                    <% listSystems.forEach(function(system) { %>
+                        <div class="column">
+                            <div class="card">
+                                <!-- Nếu hệ thống có ảnh riêng, bạn có thể dùng system.image -->
+                                <img src="<%= system.image || '/images/Tam-nhin.jpg' %>" alt="Header Image"
+                                    class="header-image">
+                                <h3>Hệ thống: <%= system.name %>
+                                </h3>
+                                <p class="text-p">
+                                    Tài liệu hướng dẫn:
+                                    <a class="link-tailieu" href="<%= system.linkInstruct %>">
+                                        <%= system.linkInstruct %>
+                                    </a>
+                                </p>
+                                <p class="text-p">
+                                    Đơn vị chủ quản: <%= system.managingUnit %>
+                                </p>
+                                <p class="text-p">
+                                    Đầu mối quản trị: <%= system.contactPoint %>
+                                </p>
+                                <br>
+                                <a href="<%= system.linkAccess %>" class="link-system">
+                                    Link truy cập: <%= system.linkAccess %>
+                                </a>
+                            </div>
+                        </div>
+                        <% }); %>
                 </div>
-                <div class="column">
-                    <div class="card">
-                        <img src="/images/Tam-nhin.jpg" alt="Header Image" class="header-image">
-                        <h3>Hệ thống: hệ thống 3</h3>
-                        <p class="text-p">Tài liệu hướng dẫn:
-                            <a class="link-tailieu" href="https://www.youtube.com/">tlhd.com.vn</a>
-                        </p>
-                        <p class="text-p">Đơn vị chủ quản: Giải phá dịch vụ viễn thông</p>
-                        <p class="text-p">Đầu mối quản trị: ...</p>
-                        <br>
-                        <a href="https://www.facebook.com/" class="link-system">
-                            Link truy cập: hethong1.com.vn
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="row_card">
-                <div class="column">
-                    <div class="card">
-                        <img src="/images/Tam-nhin.jpg" alt="Header Image" class="header-image">
-                        <h3>Hệ thống: hệ thống 1</h3>
-                        <p class="text-p">Tài liệu hướng dẫn:
-                            <a class="link-tailieu" href="https://www.youtube.com/">tlhd.com.vn</a>
-                        </p>
-                        <p class="text-p">Đơn vị chủ quản: Giải phá dịch vụ viễn thông</p>
-                        <p class="text-p">Đầu mối quản trị: ...</p>
-                        <br>
-                        <a href="https://www.facebook.com/" class="link-system">
-                            Link truy cập: hethong1.com.vn
-                        </a>
-                    </div>
-                </div>
+                <% } else { %>
+                    <p>Không có hệ thống nào.</p>
+                    <% } %>
 
-                <div class="column">
-                    <div class="card">
-                        <img src="/images/Tam-nhin.jpg" alt="Header Image" class="header-image">
-                        <h3>Hệ thống: hệ thống 2</h3>
-                        <p class="text-p">Tài liệu hướng dẫn:
-                            <a class="link-tailieu" href="https://www.youtube.com/">tlhd.com.vn</a>
-                        </p>
-                        <p class="text-p">Đơn vị chủ quản: Giải phá dịch vụ viễn thông</p>
-                        <p class="text-p">Đầu mối quản trị: ...</p>
-                        <br>
-                        <a href="https://www.facebook.com/" class="link-system">
-                            Link truy cập: hethong1.com.vn
-                        </a>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                        <img src="/images/Tam-nhin.jpg" alt="Header Image" class="header-image">
-                        <h3>Hệ thống: hệ thống 3</h3>
-                        <p class="text-p">Tài liệu hướng dẫn:
-                            <a class="link-tailieu" href="https://www.youtube.com/">tlhd.com.vn</a>
-                        </p>
-                        <p class="text-p">Đơn vị chủ quản: Giải phá dịch vụ viễn thông</p>
-                        <p class="text-p">Đầu mối quản trị: ...</p>
-                        <br>
-                        <a href="https://www.facebook.com/" class="link-system">
-                            Link truy cập: hethong1.com.vn
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pagination">
-                <a href="#">&laquo;</a>
-                <a href="#">1</a>
-                <a class="active" href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-                <a href="#">6</a>
-                <a href="#">&raquo;</a>
-            </div>
-
+                        <div class="pagination">
+                            <a href="#">&laquo;</a>
+                            <a href="#">1</a>
+                            <a class="active" href="#">2</a>
+                            <a href="#">3</a>
+                            <a href="#">4</a>
+                            <a href="#">5</a>
+                            <a href="#">6</a>
+                            <a href="#">&raquo;</a>
+                        </div>
         </div>
-
-
-
     </div>
-    </div>
-
-    </div>
+    <!-- footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-sections">
+                <div class="footer-section">
+                    <h3>GIỚI THIỆU</h3>
+                    <ul>
+                        <li><a href="#">Giới thiệu chung</a></li>
+                        <li><a href="#">Dấu mốc phát triển</a></li>
+                        <li><a href="#">Tầm nhìn sứ mệnh</a></li>
+                        <li><a href="#">Cơ cấu tổ chức</a></li>
+                        <li><a href="#">Đối tác</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>TIN TỨC</h3>
+                    <ul>
+                        <li><a href="#">Tin nội bộ</a></li>
+                        <li><a href="#">Tin trong ngành</a></li>
+                        <li><a href="#">Hoạt động đoàn thể</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>DỊCH VỤ</h3>
+                    <ul>
+                        <li><a href="#">Giá trị gia tăng</a></li>
+                        <li><a href="#">Hạ tầng viễn thông</a></li>
+                        <li><a href="#">Chăm sóc khách hàng</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section contact-info">
+                    <h3>LIÊN HỆ</h3>
+                    <p>
+                        <span class="address-icon"></span>
+                        115 Trần Duy Hưng, Trung Hòa, Cầu Giấy, Hà Nội
+                    </p>
+                    <p>
+                        <span class="email-icon"></span>
+                        info@mobifoneservice.com.vn
+                    </p>
+                    <p>
+                        <span class="phone-icon"></span>
+                        +84 12 23 34 45
+                    </p>
+                    <p>
+                        <span class="hotline-icon"></span>
+                        Hotline Cổ Đông liên hệ
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>©2015 MOBIFONE SERVICES, All Right Reserved.</p>
+                <div class="social-icons">
+                    <a href="#"></a>
+                    <a href="#"></a>
+                    <a href="#"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>

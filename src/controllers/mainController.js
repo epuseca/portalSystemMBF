@@ -2,43 +2,27 @@ const { bcryptUtil } = require("../config/hash")
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const User = require('../models/user.js')
+const User = require('../models/user.js');
+const System = require("../models/system.js");
 
 module.exports = {
-    // getMain: async (req, res) => {
-    //     res.render('build/index.ejs', {
-    //         user: req.user
-    //     });
-    // },
-    // getMainStudent: async (req, res) => {
-    //     res.render('build/student/index2.ejs', {
-    //         user: req.user
-    //     });
-    // },
-    // getProfile: async (req, res) => {
-    //     try {
-    //         const user = await User.findById(req.user.id).populate('idCtdt').exec();
-
-    //         if (!user) {
-    //             return res.status(404).json({ message: 'User not found' });
-    //         }
-
-    //         // Construct image path based on mssv and stored image filename
-    //         const imagePath = user.image ? `/img/avt/${user.image}` : '/img/avt/default.jpg';
-
-    //         res.render('build/pages/profile.ejs', {
-    //             user: user,
-    //             imagePath: imagePath
-    //         });
-    //     } catch (error) {
-    //         console.error(error);
-    //         return res.status(500).json({ message: 'Internal Server Error' });
-    //     }
-    // },
     Login: async (req, res) => {
-        let results = await User.find({});
+        let results = await System.find({});
+        let isLoggedIn = false;
+        let user = null;
+        if (req.cookies.token) {
+            try {
+                // Kiểm tra và giải mã token
+                user = jwt.verify(req.cookies.token, 'namdv');
+                isLoggedIn = true;
+            } catch (err) {
+                // Nếu token không hợp lệ hoặc hết hạn, không xác định đăng nhập
+            }
+        }
         res.render('home/home.ejs', {
-            listUsers: results
+            listSystems: results,
+            isLoggedIn: isLoggedIn,
+            user: user
         });
     },
     Logout: async (req, res) => {
@@ -49,16 +33,17 @@ module.exports = {
         console.log(">>>>req body:", req.body);
         const { username, password } = req.body;
         const user = await User.findOne({ username: username });
-
+    
         if (!user) {
-            return res.status(401).json({ message: 'User not found' });
+            // Bạn có thể hiển thị thông báo lỗi trên giao diện
+            return res.status(401).render('home/home.ejs', { error: 'User not found' });
         }
-
+    
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
-            return res.status(401).json({ message: 'Invalid password' });
+            return res.status(401).render('home/home.ejs', { error: 'Invalid password' });
         }
-
+    
         const token = jwt.sign({
             id: user._id,
             role: user.role,
@@ -72,8 +57,11 @@ module.exports = {
             lop: user.lop,
             idCtdt: user.idCtdt
         }, 'namdv', { expiresIn: '3h' });
-
+    
+        // Đặt cookie chứa token
         res.cookie('token', token, { httpOnly: true });
-        return res.status(200).json({ message: 'Login successful', token });
+        // Redirect về trang chủ sau khi đăng nhập thành công
+        return res.redirect('/');
     },
+    
 }
