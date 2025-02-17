@@ -36,7 +36,10 @@ module.exports = {
     //     }
     // },
     Login: async (req, res) => {
-        res.render('home/home.ejs');
+        let results = await User.find({});
+        res.render('home/home.ejs', {
+            listUsers: results
+        });
     },
     Logout: async (req, res) => {
         res.clearCookie('token');

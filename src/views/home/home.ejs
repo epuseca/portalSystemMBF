@@ -154,14 +154,39 @@
                 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                 <a class="next" onclick="plusSlides(1)">&#10095;</a>
             </div>
-            <br>
+
             <!-- The dots/circles can click -->
-            <div style="text-align:right;margin-right: 15px;">
+            <div style="text-align:right;margin-right: 15px;margin-top: 5px;">
                 <span class="dot" onclick="currentSlide(1)"></span>
                 <span class="dot" onclick="currentSlide(2)"></span>
                 <span class="dot" onclick="currentSlide(3)"></span>
             </div>
+            <!-- test list user -->
+            <div>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Email</th>
+                        <th>Name</th>
+                    </tr>
+                    <% for(let i=0; i < listUsers.length; i++){%>
 
+
+                        <tr>
+                            <td>
+                                <%= listUsers[i].id %>
+                            </td>
+                            <td>
+                                <%= listUsers[i].email %>
+                            </td>
+                            <td>
+                                <%= listUsers[i].name %>
+                            </td>
+                        </tr>
+                        
+                        <%} %>
+                </table>
+            </div>
 
             <h2 class="title-hethong">Hệ thống</h2>
             <div class="row_card">
@@ -260,8 +285,6 @@
                     </div>
                 </div>
             </div>
-            <h2>Pagination</h2>
-            <p>Responsive pagination with hover effects:</p>
 
             <div class="pagination">
                 <a href="#">&laquo;</a>

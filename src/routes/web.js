@@ -4,6 +4,7 @@ const middleware = require('../middleware/middleware')
 
 const { getHomePage, getRenderPic } = require('../controllers/homeController');
 const { loginUser, getMain, Login, Logout, getProfile, } = require('../controllers/mainController')
+const { GetListSystem} = require('../controllers/systemController.js')
 
 //router.get('/', getHomePage)
 router.get('/home', getRenderPic)
@@ -11,5 +12,8 @@ router.get('/home', getRenderPic)
 router.get('/', Login) //Render ra trang login đầu
 router.post('/login', loginUser); //check login
 router.get('/logout', Logout); //clear token
+
+//System
+router.get('/', GetListSystem);
 
 module.exports = router;
