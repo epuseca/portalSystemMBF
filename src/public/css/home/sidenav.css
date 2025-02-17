@@ -14,7 +14,6 @@ body {
   /* Left column (menu) */
   .left {
     flex: 35%;
-    padding: 15px 0;
     margin-left: 150px;
   }
   
@@ -25,9 +24,8 @@ body {
   /* Right column (page content) */
   .right {
     flex: 65%;
-    padding: 15px;
+    padding: 0px;
     margin-right: 150px;
-
   }
   
   /* Style the search box */

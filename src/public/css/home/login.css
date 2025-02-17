@@ -1,7 +1,7 @@
 body {font-family: Arial, Helvetica, sans-serif;}
 
 /* Full-width input fields */
-input[type=text], input[type=password] {
+input[type=text_uname], input[type=password] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -12,7 +12,7 @@ input[type=text], input[type=password] {
 
 /* Set a style for all buttons */
 button {
-  background-color: #04AA6D;
+  background-color: #ffffff;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -40,7 +40,8 @@ button:hover {
 }
 
 img.avatar {
-  width: 40%;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
 }
 
@@ -71,9 +72,9 @@ span.psw {
 /* Modal Content/Box */
 .modal-content {
   background-color: #fefefe;
-  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  margin: 0% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 450px; /* Could be more or less, depending on screen size */
 }
 
 /* The Close Button (x) */

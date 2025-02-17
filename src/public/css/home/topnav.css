@@ -1,0 +1,193 @@
+.navbar_brand{
+    width: 156px;
+    height: 53px;
+    margin-right: 150px;
+}
+.search_info{
+    margin-bottom: 10px;
+    width: 180px;
+  }
+  .active_navbar{
+    background-color: white;
+    color: 2b7dcf;
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    color: white;
+    padding: 0 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    
+    /* position: fixed; Set the navbar to fixed position */
+
+}
+
+.menu-left, .menu-right, .logo {
+    display: flex;
+    align-items: center;
+}
+.menu-left{
+  
+}
+.menu-title{
+  height: 80px;
+}
+.logo img {
+    max-height: 50px;
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+}
+
+.hamburger span {
+    background-color: #2b7dcf;
+    height: 3px;
+    width: 100%;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.cta-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #0056b3;
+}
+
+.mobile-menu {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: width 0.5s ease;
+    padding-top: 60px;
+}
+
+.mobile-menu a {
+    padding: 15px 25px;
+    text-decoration: none;
+    font-size: 22px;
+    color: white;
+    display: block;
+    transition: color 0.3s ease;
+}
+
+.mobile-menu a:hover {
+    color: #ddd;
+}
+
+.mobile-menu .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .menu-left, .menu-right .cta-button {
+        display: none;
+    }
+
+    .menu-right .hamburger {
+        display: flex;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .mobile-menu {
+        display: none;
+    }
+}
+
+a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+    
+    background-color: white;
+    color: #2b7dcf;
+    padding: 16px;
+    font-size: 16px;  
+    font-family: inherit;
+    margin: 0;
+    font-weight: bold;
+    border: none;
+}
+
+
+
+.navbar a:not(.cta-button) {
+    padding: 10px 15px;
+    margin: 0 5px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar a:not(.cta-button):hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+  .title_midnavbar{
+    height: 50px;
+  }
+  /* Dropdown Button */
+  .dropdown {
+    float: left;
+    overflow: hidden;
+  }
+ 
+  .dropbtn {
+    background-color: white;
+    color: #2b7dcf;
+    padding: 16px;
+    font-size: 16px;  
+    font-family: inherit;
+    margin: 0;
+    font-weight: bold;
+    border: none;
+    
+  }
+   /* .dropdown:hover .dropbtn {background-color: #ddd;} */
+  .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #2b7dcf;
+  }
+  .dropdown-content {
+    max-height: 0;  /* Ban đầu ẩn */
+    overflow: hidden;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    z-index: 1;
+    transition: max-height 0.5s ease-in-out;
+}
+
+.dropdown:hover .dropdown-content {
+    max-height: 200px; /* Điều chỉnh theo số lượng item */
+}

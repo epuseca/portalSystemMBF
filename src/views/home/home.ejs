@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal network</title>
-    <link rel="stylesheet" href="/css/topnav.css">
-    <link rel="stylesheet" href="/css/sidenav.css">
-    <link rel="stylesheet" href="/css/topnav_slideshow.css">
-    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/home/topnav.css">
+    <link rel="stylesheet" href="/css/home/sidenav.css">
+    <link rel="stylesheet" href="/css/home/topnav_slideshow.css">
+    <link rel="stylesheet" href="/css/home/login.css">
     <script src="/scripts/sidebar.js"></script>
+    <script src="/scripts/navbar.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -16,77 +17,99 @@
 
 <body>
     <!-- topbar -->
-    <div class="topnav">
-        <img class="navbar_brand" src="/images/logo.png">
-        <a class="active" href="#home">Trang chủ</a>
-        <!-- Giới thiệu -->
-        <div class="dropdown">
-            <a href="#introduce" class="dropbtn">Giới thiệu
-                <i class="fa fa-caret-down"></i>
-            </a>
-            <div class="dropdown-content">
-                <a href="#">Link 1</a>
-                <a href="#">Link 2</a>
-                <a href="#">Link 3</a>
-            </div>
+    <nav class="navbar">
+        <div class="logo">
+            <img alt="Logo" src="/images/logo.png">
         </div>
-        <!-- Tin tức -->
-        <div class="dropdown">
-            <a href="#news" class="dropbtn">Tin tức
-                <i class="fa fa-caret-down"></i>
-            </a>
-            <div class="dropdown-content">
-                <a href="#">Link 1</a>
-                <a href="#">Link 2</a>
-                <a href="#">Link 3</a>
+        <div class="menu-left">
+            <a class="active_navbar " href="#home">Trang chủ</a>
+            <!-- Giới thiệu -->
+            <div class="dropdown">
+                <a href="#introduce" class="dropbtn">Giới thiệu
+                    <i class="fa fa-caret-down"></i>
+                </a>
+                <div class="dropdown-content">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                </div>
             </div>
-        </div>
-        <!-- Liên hệ -->
-        <div class="dropdown">
-            <a href="#contact" class="dropbtn">Liên hệ
-                <i class="fa fa-caret-down"></i>
-            </a>
-            <div class="dropdown-content">
-                <a href="#">Link 1</a>
-                <a href="#">Link 2</a>
-                <a href="#">Link 3</a>
+            <!-- Tin tức -->
+            <div class="dropdown">
+                <a href="#news" class="dropbtn">Tin tức
+                    <i class="fa fa-caret-down"></i>
+                </a>
+                <div class="dropdown-content">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                </div>
             </div>
+            <!-- Liên hệ -->
+            <div class="dropdown">
+                <a href="#contact" class="dropbtn">Liên hệ
+                    <i class="fa fa-caret-down"></i>
+                </a>
+                <div class="dropdown-content">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                </div>
+            </div>
+            <a style="color: #2b7dcf; font-size: 16px;
+    font-weight: bold;" href="#search"><i class="fa fa-fw fa-search"></i>Tìm kiếm</a>
         </div>
-        <a href="#search"><i class="fa fa-fw fa-search"></i>Tìm kiếm</a>
+
         <!-- <input class="search_info" type="text" placeholder="Search.."> -->
-        <a href="#login">Đăng nhập</a>
-        <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+        <div class="menu-right">
+            <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;"><a style="color: #2b7dcf; font-size: 17px;
+    font-weight: bold;" href="#login">Đăng nhập</a></button>
 
-        <div id="id01" class="modal">
+            <div id="id01" class="modal">
 
-            <form class="modal-content animate" action="/action_page.php" method="post">
-                <div class="imgcontainer">
-                    <span onclick="document.getElementById('id01').style.display='none'" class="close"
-                        title="Close Modal">&times;</span>
-                    <img src="/images/Su-menh.jpg" alt="Avatar" class="avatar">
-                </div>
+                <form class="modal-content animate" action="/login" method="POST">
+                    <div class="imgcontainer">
+                        <span onclick="document.getElementById('id01').style.display='none'" class="close"
+                            title="Close Modal">&times;</span>
+                        <img src="/images/Su-menh.jpg" alt="Avatar" class="avatar">
+                    </div>
 
-                <div class="container">
-                    <label for="uname"><b>Username</b></label>
-                    <input type="text" placeholder="Enter Username" name="uname" required>
+                    <div class="container">
+                        <label style="color: black;" for="uname"><b>Username</b></label>
+                        <input type="text_uname" placeholder="Enter Username" name="username" required>
 
-                    <label for="psw"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="psw" required>
+                        <label style="color: black;" for="psw"><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password" name="password" required>
 
-                    <button type="submit">Login</button>
-                    <label>
-                        <input type="checkbox" checked="checked" name="remember"> Remember me
-                    </label>
-                </div>
+                        <button style="background-color: #2b7dcf;" type="submit">Login</button>
+                        <label style="color: black;">
+                            <input type="checkbox" checked="checked" name="remember"> Remember me
+                        </label>
+                    </div>
 
-                <div class="container" style="background-color:#f1f1f1">
-                    <button type="button" onclick="document.getElementById('id01').style.display='none'"
-                        class="cancelbtn">Cancel</button>
-                    <span class="psw">Forgot <a href="#">password?</a></span>
-                </div>
-            </form>
+                    <div class="container" style="background-color:#f1f1f1">
+                        <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                            class="cancelbtn">Cancel</button>
+                        <span class="psw"> <a style="color: black;" href="#">Forgot password?</a></span>
+                    </div>
+                </form>
+            </div>
+            <div class="hamburger" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
 
+
+
+    </nav>
+    <div id="mobileMenu" class="mobile-menu">
+        <a href="#" class="closebtn" onclick="toggleMobileMenu()">&times;</a>
+        <a href="#">Home</a>
+        <a href="#">Services</a>
+        <a href="#">About</a>
+        <a href="#" class="cta-button">Contact Us</a>
     </div>
 
     <!-- sidenav -->
@@ -130,23 +153,52 @@
                 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                 <a class="next" onclick="plusSlides(1)">&#10095;</a>
             </div>
-            <br>
-
             <!-- The dots/circles can click -->
-            <div style="text-align:center">
+            <div style="text-align:right;margin-right: 15px;">
                 <span class="dot" onclick="currentSlide(1)"></span>
                 <span class="dot" onclick="currentSlide(2)"></span>
                 <span class="dot" onclick="currentSlide(3)"></span>
             </div>
-            <!-- <div style="text-align:center">
-                <span class="dot"></span> 
-                <span class="dot"></span> 
-                <span class="dot"></span> 
-              </div> -->
+
+
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
+            <div>abc</div>
         </div>
+
     </div>
-
-
 </body>
 
 </html>
