@@ -10,6 +10,9 @@ const app = express() // tạo express application
 const port = process.env.PORT // init port
 const hostname = process.env.HOST_NAME  // init port
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 configViewEngine(app);
 
 app.use('/', webRoutes);

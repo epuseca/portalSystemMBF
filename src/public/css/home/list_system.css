@@ -1,0 +1,96 @@
+* {
+    box-sizing: border-box;
+  }
+  /* Float four columns side by side */
+  .column {
+    float: left;
+    width: 33.33%;
+    padding: 10px 10px;
+  }
+  
+  /* Remove extra left and right margins, due to padding */
+  .row_card {margin: 0 -5px;}
+  
+  /* Clear floats after the columns */
+  .row_card:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Responsive columns */
+  @media screen and (max-width: 600px) {
+    .column {
+      width: 100%;
+      display: block;
+      margin-bottom: 20px;
+    }
+  }
+  
+  /* Style the counter cards */
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 4px;
+    text-align: left;
+    height: 350px;
+    border-radius: 5%;
+    background-color: #60bef54d;
+
+  }
+  /* Image style */
+.header-image {
+    width: 100%;
+    border-top-left-radius: 5%;
+    border-top-right-radius: 5%;
+    height: 40%;
+  }
+  .title-hethong{
+    margin: 5px;
+    /* color: #2b7dcf; */
+  }
+  .text-p{
+    margin: 5px;
+  }
+  .link-system {
+    background-color: #ffffff00;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    display: block;
+    text-align: center; /* Center the text inside the link */
+    margin-top: auto; /* Ensure it's pushed down to the bottom */
+    border: 1px solid rgb(50, 119, 215);
+  }
+  .link-system:hover {
+    box-shadow: 0 2px 5px rgb(50, 119, 215);
+  }
+  .link-tailieu{
+    font-size: 16px;
+    color: black;
+    background-color: rgba(255, 255, 255, 0);
+    font-weight: 200;
+    text-decoration: underline;
+    padding-left: 0px;
+  }
+  .pagination {
+    text-align: right;
+  }
+  .pagination a {
+    color: black;
+    display: inline-block;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    background-color: rgba(255, 255, 255, 0);
+  }
+  .pagination a:hover {
+    background-color: rgb(30, 143, 255);
+    color: rgba(30, 143, 255, 0.819);
+  }
+  .pagination a.active {
+    background-color: dodgerblue;
+    color: white;
+  }
+  
+  .pagination a:hover:not(.active) {background-color: #ddd;}
