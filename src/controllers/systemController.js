@@ -5,7 +5,8 @@ module.exports = {
         try {
             let results = await System.find({});
             console.log("Danh sách System:", results); // In ra toàn bộ thông tin của System
-            res.status(200).json(results);
+            res.render('system/createSystem.ejs', { systems: results });
+
         } catch (err) {
             console.error(err);
             res.status(500).json({ message: 'Internal Server Error' });

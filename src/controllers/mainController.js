@@ -24,6 +24,7 @@ module.exports = {
             isLoggedIn: isLoggedIn,
             user: user
         });
+
     },
     Logout: async (req, res) => {
         res.clearCookie('token');
@@ -33,17 +34,17 @@ module.exports = {
         console.log(">>>>req body:", req.body);
         const { username, password } = req.body;
         const user = await User.findOne({ username: username });
-    
+
         if (!user) {
             // Bạn có thể hiển thị thông báo lỗi trên giao diện
             return res.status(401).render('home/home.ejs', { error: 'User not found' });
         }
-    
+
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
             return res.status(401).render('home/home.ejs', { error: 'Invalid password' });
         }
-    
+
         const token = jwt.sign({
             id: user._id,
             role: user.role,
@@ -57,11 +58,11 @@ module.exports = {
             lop: user.lop,
             idCtdt: user.idCtdt
         }, 'namdv', { expiresIn: '3h' });
-    
+
         // Đặt cookie chứa token
         res.cookie('token', token, { httpOnly: true });
         // Redirect về trang chủ sau khi đăng nhập thành công
         return res.redirect('/');
     },
-    
+
 }

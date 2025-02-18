@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create System</title>
+    <link rel="stylesheet" href="/css/home/topnav.css">
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            width: 50%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px #ccc;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #04AA6D;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        button {
+            background-color: #ffffff;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img alt="Logo" src="/images/logo.png">
+        </div>
+        <div class="menu-left">
+            <a class="active_navbar " href="/">Trang chủ</a>
+            <a class="active_navbar " href="/system">Hệ thống</a>
+            <!-- Giới thiệu -->
+            <div class="dropdown">
+                <a href="#introduce" class="dropbtn">Giới thiệu
+                    <i class="fa fa-caret-down"></i>
+                </a>
+                <div class="dropdown-content">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                </div>
+            </div>
+            <!-- Tin tức -->
+            <div class="dropdown">
+                <a href="#news" class="dropbtn">Tin tức
+                    <i class="fa fa-caret-down"></i>
+                </a>
+                <div class="dropdown-content">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                </div>
+            </div>
+            <!-- Liên hệ -->
+            <div class="dropdown">
+                <a href="#contact" class="dropbtn">Liên hệ
+                    <i class="fa fa-caret-down"></i>
+                </a>
+                <div class="dropdown-content">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                </div>
+            </div>
+            <a style="color: #2b7dcf; font-size: 16px;
+    font-weight: bold;" href="#search"><i class="fa fa-fw fa-search"></i>Tìm kiếm</a>
+        </div>
+
+        <!-- <input class="search_info" type="text" placeholder="Search.."> -->
+        <div class="menu-right">
+            <!-- Nếu đã đăng nhập, hiển thị link Đăng xuất -->
+            <button style="width:auto;">
+                <a style="color: #2b7dcf; font-size: 17px; font-weight: bold;" href="/logout">Đăng xuất</a>
+            </button>
+        </div>
+
+
+
+    </nav>
+    <div id="mobileMenu" class="mobile-menu">
+        <a href="#" class="closebtn" onclick="toggleMobileMenu()">&times;</a>
+        <a href="#">Home</a>
+        <a href="#">Services</a>
+        <a href="#">About</a>
+        <a href="#" class="cta-button">Contact Us</a>
+    </div>
+    <div class="container">
+        <h2>Create New System</h2>
+        <form id="createSystemForm">
+            <label for="name">System Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="idSystem">System ID</label>
+            <input type="text" id="idSystem" name="idSystem" required>
+
+            <label for="image">Image URL</label>
+            <input type="text" id="image" name="image">
+
+            <label for="description">Description</label>
+            <textarea id="description" name="description"></textarea>
+
+            <label for="tagNv">Tag NV</label>
+            <input type="text" id="tagNv" name="tagNv">
+
+            <label for="linkAccess">Access Link</label>
+            <input type="text" id="linkAccess" name="linkAccess">
+
+            <label for="linkInstruct">Instruction Link</label>
+            <input type="text" id="linkInstruct" name="linkInstruct">
+
+            <label for="managingUnit">Managing Unit</label>
+            <input type="text" id="managingUnit" name="managingUnit">
+
+            <label for="contactPoint">Contact Point</label>
+            <input type="text" id="contactPoint" name="contactPoint">
+
+            <input type="submit" value="Create System">
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("createSystemForm").addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+
+            try {
+                const response = await fetch("/system", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    alert("System created successfully!");
+                    this.reset();
+                } else {
+                    alert("Failed to create system.");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("An error occurred while creating the system.");
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -25,6 +25,7 @@
         </div>
         <div class="menu-left">
             <a class="active_navbar " href="#home">Trang chủ</a>
+            <a class="active_navbar " href="/system">Hệ thống</a>
             <!-- Giới thiệu -->
             <div class="dropdown">
                 <a href="#introduce" class="dropbtn">Giới thiệu
@@ -67,7 +68,9 @@
 
             <% if (isLoggedIn) { %>
                 <!-- Nếu đã đăng nhập, hiển thị link Đăng xuất -->
-                <a href="/logout" style="color: #2b7dcf; font-size: 17px; font-weight: bold;">Đăng xuất</a>
+                <button style="width:auto;">
+                    <a style="color: #2b7dcf; font-size: 17px; font-weight: bold;" href="/logout">Đăng xuất</a>
+                </button>
                 <% } else { %>
                     <!-- Nếu chưa đăng nhập, hiển thị nút đăng nhập (mở modal) -->
                     <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">
@@ -123,7 +126,7 @@
 
     <!-- sidenav -->
     <div class="row">
-        <div class="left" style="background-color:#bbb;">
+        <div class="left">
             <h2>Tag nghiệp vụ</h2>
             <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." title="Type in a category">
             <ul id="myMenu">
@@ -134,7 +137,7 @@
             </ul>
         </div>
 
-        <div class="right" style="background-color:#ddd;">
+        <div class="right">
 
             <!-- Slideshow container -->
             <div class="slideshow-container">
