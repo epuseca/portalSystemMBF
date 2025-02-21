@@ -11,7 +11,8 @@ const { getListUser, postUser, putUser, deteteUser } = require('../controllers/u
 //router.get('/', getHomePage)
 router.get('/home', getRenderPic)
 
-router.get('/', Login) //Render ra trang login đầu
+// router.get('/', Login) //Render ra trang login đầu
+router.get('/', test) //Render ra trang login đầu thành test
 router.get('/test', test) //Render ra trang login đầu
 router.post('/login', loginUser); //check login
 router.get('/logout', Logout); //clear token

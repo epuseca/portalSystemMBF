@@ -197,7 +197,7 @@
         }
 
         .edit-close {
-            margin-left: 920px;
+            position: absolute;
             right: 25px;
             top: 0;
             color: #000;
@@ -347,8 +347,8 @@
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
-                <a href="#"><i class="fa fa-caret-right"></i>Danh sách hệ thống</a>
-                <a href="#"><i class="fa fa-caret-right"></i>Thêm hệ thống</a>
+                <a id="showListSystem" href="#"><i class="fa fa-caret-right"></i>Danh sách hệ thống</a>
+                <a id="showCreateSystem" href="#"><i class="fa fa-caret-right"></i>Thêm hệ thống</a>
             </div>
             <button class="dropdown-btn"> Tag nghiệp vụ
                 <i class="fa fa-caret-down"></i>
@@ -371,7 +371,8 @@
     </div>
 
     <!-- List system form -->
-    <div class="container">
+    <div id="listSystemContainer" class="container">
+        <!-- <div class="container" style="display: none;"></div> -->
         <h1>Danh sách hệ thống</h1>
         <table>
             <tr>
@@ -428,7 +429,7 @@
                     </td>
                     <td>
                         <button onclick="document.getElementById('editModal').style.display='block'" style="width:auto;"
-                            class="edit-btn" onclick="alert('Chi tiết của <%= system.name %>')">Chi tiết</button>
+                            class="edit-btn" onclick="alert('Chi tiết của <%= system.name %>')">Edit</button>
                     </td>
                 </tr>
                 <% }); %>
@@ -437,7 +438,7 @@
     <!-- Modal Edit Form -->
     <div id="editModal" class="edit-modal">
         <form class="edit-modal-content edit-animate" action="/system/edit" method="post">
-            <div >
+            <div>
                 <span onclick="document.getElementById('editModal').style.display='none'" class="edit-close"
                     title="Close Modal">&times;</span>
             </div>
@@ -493,7 +494,8 @@
                 </div>
 
                 <button type="submit">Lưu thay đổi</button>
-                <button style="display: none;" type="button" onclick="document.getElementById('editModal').style.display='none'"
+                <button style="display: none;" type="button"
+                    onclick="document.getElementById('editModal').style.display='none'"
                     class="edit-cancelbtn">Hủy</button>
             </div>
         </form>
@@ -501,9 +503,9 @@
 
 
     <!-- Create system form -->
-    <div class="container" style="display: none;">
+    <div id="createSystemContainer" class="container" style="display: none;">
         <!-- <div class="container"> -->
-        <h2>Tạo mới hệ thống</h2>
+        <h1>Tạo mới hệ thống</h1>
         <form id="createSystemForm">
             <label for="name">Tên hệ thống</label>
             <input type="text" id="name" name="name" required>
@@ -587,6 +589,20 @@
                 editModal.style.display = "none";
             }
         }
+        //Bật tắt list và create hệ thống
+        // Lắng nghe sự kiện click vào "Danh sách hệ thống"
+        document.getElementById("showListSystem").addEventListener("click", function (event) {
+            event.preventDefault();
+            document.getElementById("listSystemContainer").style.display = "block";
+            document.getElementById("createSystemContainer").style.display = "none";
+        });
+
+        // Lắng nghe sự kiện click vào "Thêm hệ thống"
+        document.getElementById("showCreateSystem").addEventListener("click", function (event) {
+            event.preventDefault();
+            document.getElementById("listSystemContainer").style.display = "none";
+            document.getElementById("createSystemContainer").style.display = "block";
+        });
     </script>
 </body>
 
