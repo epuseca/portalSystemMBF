@@ -25,41 +25,43 @@
         </div>
         <div class="menu-left">
             <a class="active_navbar " href="#home">Trang chủ</a>
-            <a class="active_navbar " href="/system">Hệ thống</a>
-            <!-- Giới thiệu -->
-            <div class="dropdown">
-                <a href="#introduce" class="dropbtn">Giới thiệu
-                    <i class="fa fa-caret-down"></i>
-                </a>
-                <div class="dropdown-content">
-                    <a href="#">Link 1</a>
-                    <a href="#">Link 2</a>
-                    <a href="#">Link 3</a>
-                </div>
-            </div>
-            <!-- Tin tức -->
-            <div class="dropdown">
-                <a href="#news" class="dropbtn">Tin tức
-                    <i class="fa fa-caret-down"></i>
-                </a>
-                <div class="dropdown-content">
-                    <a href="#">Link 1</a>
-                    <a href="#">Link 2</a>
-                    <a href="#">Link 3</a>
-                </div>
-            </div>
-            <!-- Liên hệ -->
-            <div class="dropdown">
-                <a href="#contact" class="dropbtn">Liên hệ
-                    <i class="fa fa-caret-down"></i>
-                </a>
-                <div class="dropdown-content">
-                    <a href="#">Link 1</a>
-                    <a href="#">Link 2</a>
-                    <a href="#">Link 3</a>
-                </div>
-            </div>
-            <a style="color: #2b7dcf; font-size: 16px;
+            <% if (isLoggedIn) { %>
+                <a class="active_navbar" href="/system">Hệ thống</a>
+                <% } %>
+                    <!-- Giới thiệu -->
+                    <div class="dropdown">
+                        <a href="#introduce" class="dropbtn">Giới thiệu
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="#">Link 1</a>
+                            <a href="#">Link 2</a>
+                            <a href="#">Link 3</a>
+                        </div>
+                    </div>
+                    <!-- Tin tức -->
+                    <div class="dropdown">
+                        <a href="#news" class="dropbtn">Tin tức
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="#">Link 1</a>
+                            <a href="#">Link 2</a>
+                            <a href="#">Link 3</a>
+                        </div>
+                    </div>
+                    <!-- Liên hệ -->
+                    <div class="dropdown">
+                        <a href="#contact" class="dropbtn">Liên hệ
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="#">Link 1</a>
+                            <a href="#">Link 2</a>
+                            <a href="#">Link 3</a>
+                        </div>
+                    </div>
+                    <a style="color: #2b7dcf; font-size: 16px;
     font-weight: bold;" href="#search"><i class="fa fa-fw fa-search"></i>Tìm kiếm</a>
         </div>
 

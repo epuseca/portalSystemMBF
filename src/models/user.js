@@ -3,17 +3,13 @@ const bcrypt = require('bcrypt');
 const mongoose_delete = require('mongoose-delete');
 
 const userSchema = new mongoose.Schema({
-  mssv: { type: String, required: true },
   name: String,
   email: String,
-  address: { type: String, default: 'Hust' },
+  address: { type: String, default: 'Mobifone' },
   sex: { type: String, enum: ["male", "female"], required: true, default: 'male' },
-  role: { type: String, enum: ["admin", "teacher", "student"], required: true },
+  role: { type: String, enum: ["admin"], required: true , default: 'admin'},
   username: { type: String, required: true },
   password: { type: String, required: true, default: '123456' },
-  khoa: String, //64
-  lop: String, //Điện tử 06
-  idCtdt: { type: mongoose.Schema.Types.ObjectId, ref: 'CTDT' },
   image: { type: String, required: false },
   description: Array,
 });

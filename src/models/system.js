@@ -8,7 +8,10 @@ const systemSchema = new mongoose.Schema(
         idSystem: { type: String, required: true },
         image: { type: String, required: false },
         description: String,
-        tagNv: String,
+        tagNv: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'tag'
+          }],
         linkAccess: String,
         linkInstruct: String,
         managingUnit: String,

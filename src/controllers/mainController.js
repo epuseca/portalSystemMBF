@@ -4,26 +4,29 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/user.js');
 const System = require("../models/system.js");
+const Tag = require('../models/tag'); // đảm bảo import model Tag
 
 module.exports = {
     test: async (req, res) => {
+        let listSystems = await System.find({}).populate('tagNv');
+        let listTags = await Tag.find({});
+
         let isLoggedIn = false;
         let user = null;
         if (req.cookies.token) {
             try {
-                // Kiểm tra và giải mã token
                 user = jwt.verify(req.cookies.token, 'namdv');
                 isLoggedIn = true;
             } catch (err) {
-                // Nếu token không hợp lệ hoặc hết hạn, không xác định đăng nhập
+                // Nếu token không hợp lệ hoặc hết hạn
             }
         }
         res.render('home/test.ejs', {
+            listSystems: listSystems,
+            listTags: listTags,
             isLoggedIn: isLoggedIn,
             user: user
         });
-
-
     },
     Login: async (req, res) => {
         let results = await System.find({});

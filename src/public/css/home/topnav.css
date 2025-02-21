@@ -10,6 +10,7 @@
   .active_navbar{
     background-color: white;
     color: 2b7dcf;
+    font-weight: bold;
   }
 
   .navbar {
@@ -122,14 +123,11 @@
 a {
     text-decoration: none;
     transition: color 0.3s ease;
-    
     background-color: white;
     color: #2b7dcf;
-    padding: 16px;
     font-size: 16px;  
     font-family: inherit;
     margin: 0;
-    font-weight: bold;
     border: none;
 }
 
@@ -191,3 +189,4 @@ a {
 .dropdown:hover .dropdown-content {
     max-height: 200px; /* Điều chỉnh theo số lượng item */
 }
+
