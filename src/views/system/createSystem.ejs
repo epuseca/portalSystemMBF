@@ -286,6 +286,25 @@
         .edit-col {
             flex: 1;
         }
+
+        .delete-btn {
+            background-color: #f44336;
+            /* Màu nền đỏ */
+            color: #fff;
+            /* Màu chữ trắng */
+            border: none;
+            padding: 8px 12px;
+            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 5px;
+            /* Tùy chọn để có khoảng cách so với nút Edit */
+        }
+
+        .delete-btn:hover {
+            background-color: #d32f2f;
+        }
     </style>
 </head>
 
@@ -428,8 +447,20 @@
                         <%= system.contactPoint %>
                     </td>
                     <td>
-                        <button onclick="document.getElementById('editModal').style.display='block'" style="width:auto;"
-                            class="edit-btn" onclick="alert('Chi tiết của <%= system.name %>')">Edit</button>
+                        <button class="edit-btn" style="width:auto;" data-systemid="<%= system._id %>"
+                            data-name="<%= system.name %>" data-idsystem="<%= system.idSystem %>"
+                            data-image="<%= system.image %>" data-description="<%= system.description %>"
+                            data-linkaccess="<%= system.linkAccess %>" data-linkinstruct="<%= system.linkInstruct %>"
+                            data-managingunit="<%= system.managingUnit %>"
+                            data-contactpoint="<%= system.contactPoint %>"
+                            data-tagnv="<%= system.tagNv && system.tagNv.length > 0 ? system.tagNv.map(function(tag){ return tag.name; }).join(', ') : '' %>"
+                            onclick="openEditModal(this)">
+                            Edit
+                        </button>
+                        <button class="delete-btn" style="width:auto;" data-systemid="<%= system._id %>"
+                            onclick="deleteSystem(this)">
+                            Delete
+                        </button>
                     </td>
                 </tr>
                 <% }); %>
@@ -437,7 +468,7 @@
     </div>
     <!-- Modal Edit Form -->
     <div id="editModal" class="edit-modal">
-        <form class="edit-modal-content edit-animate" action="/system/edit" method="post">
+        <form id="editForm" class="edit-modal-content edit-animate" action="/system/edit" method="post">
             <div>
                 <span onclick="document.getElementById('editModal').style.display='none'" class="edit-close"
                     title="Close Modal">&times;</span>
@@ -446,60 +477,62 @@
             <div class="edit-container">
                 <h1 style="margin-top: 10px;">Chỉnh sửa hệ thống</h1>
 
+                <!-- Trường ẩn lưu _id của hệ thống (MongoDB _id) -->
+                <!-- <input type="hidden" id="_id" name="_id"> -->
+                <input id="_id" name="_id">
+
                 <!-- Tên hệ thống và ID hệ thống trên cùng 1 dòng -->
                 <div class="edit-row">
                     <div class="edit-col">
-                        <label for="editName"><b>Tên hệ thống</b></label>
-                        <input type="text" placeholder="Nhập tên hệ thống" name="editName" id="editName" required>
+                        <label for="name"><b>Tên hệ thống</b></label>
+                        <input type="text" placeholder="Nhập tên hệ thống" name="name" id="name" required>
                     </div>
                     <div class="edit-col">
-                        <label for="editIdSystem"><b>ID hệ thống</b></label>
-                        <input type="text" placeholder="Nhập ID hệ thống" name="editIdSystem" id="editIdSystem"
-                            required>
+                        <label for="idSystem"><b>ID hệ thống</b></label>
+                        <input type="text" placeholder="Nhập ID hệ thống" name="idSystem" id="idSystem" required>
                     </div>
                 </div>
 
-                <label for="editImage"><b>Link ảnh</b></label>
-                <input type="text" placeholder="Nhập link ảnh" name="editImage" id="editImage">
+                <label for="image"><b>Link ảnh</b></label>
+                <input type="text" placeholder="Nhập link ảnh" name="image" id="image">
 
-                <label for="editDescription"><b>Mô tả</b></label>
-                <textarea placeholder="Nhập mô tả" name="editDescription" id="editDescription"></textarea>
+                <label for="description"><b>Mô tả</b></label>
+                <textarea placeholder="Nhập mô tả" name="description" id="description"></textarea>
 
                 <label for="editTagNv"><b>Tag nghiệp vụ</b></label>
                 <input type="text" placeholder="Nhập tag nghiệp vụ" name="editTagNv" id="editTagNv">
 
                 <div class="edit-row">
                     <div class="edit-col">
-                        <label for="editLinkAccess"><b>Link truy cập</b></label>
-                        <input type="text" placeholder="Nhập link truy cập" name="editLinkAccess" id="editLinkAccess">
+                        <label for="linkAccess"><b>Link truy cập</b></label>
+                        <input type="text" placeholder="Nhập link truy cập" name="linkAccess" id="linkAccess">
                     </div>
                     <div class="edit-col">
-                        <label for="editLinkInstruct"><b>Tài liệu hướng dẫn</b></label>
-                        <input type="text" placeholder="Nhập tài liệu hướng dẫn" name="editLinkInstruct"
-                            id="editLinkInstruct" required>
+                        <label for="linkInstruct"><b>Tài liệu hướng dẫn</b></label>
+                        <input type="text" placeholder="Nhập tài liệu hướng dẫn" name="linkInstruct" id="linkInstruct">
                     </div>
                 </div>
 
                 <div class="edit-row">
                     <div class="edit-col">
-                        <label for="editManagingUnit"><b>Đơn vị chủ quản</b></label>
-                        <input type="text" placeholder="Nhập đơn vị chủ quản" name="editManagingUnit"
-                            id="editManagingUnit">
+                        <label for="managingUnit"><b>Đơn vị chủ quản</b></label>
+                        <input type="text" placeholder="Nhập đơn vị chủ quản" name="managingUnit" id="managingUnit">
                     </div>
                     <div class="edit-col">
-                        <label for="editContactPoint"><b>Đầu mối quản trị</b></label>
-                        <input type="text" placeholder="Nhập đầu mối quản trị" name="editContactPoint"
-                            id="editContactPoint" required>
+                        <label for="contactPoint"><b>Đầu mối quản trị</b></label>
+                        <input type="text" placeholder="Nhập đầu mối quản trị" name="contactPoint" id="contactPoint"
+                            required>
                     </div>
                 </div>
 
                 <button type="submit">Lưu thay đổi</button>
-                <button style="display: none;" type="button"
-                    onclick="document.getElementById('editModal').style.display='none'"
+                <button type="button" onclick="document.getElementById('editModal').style.display='none'"
                     class="edit-cancelbtn">Hủy</button>
             </div>
+
         </form>
     </div>
+
 
 
     <!-- Create system form -->
@@ -603,6 +636,83 @@
             document.getElementById("listSystemContainer").style.display = "none";
             document.getElementById("createSystemContainer").style.display = "block";
         });
+        function openEditModal(button) {
+            // Lấy dữ liệu từ thuộc tính data của nút Edit
+            var systemId = button.getAttribute("data-systemid");
+            var systemName = button.getAttribute("data-name");
+            var idSystem = button.getAttribute("data-idsystem");
+            var image = button.getAttribute("data-image");
+            var description = button.getAttribute("data-description");
+            var linkAccess = button.getAttribute("data-linkaccess");
+            var linkInstruct = button.getAttribute("data-linkinstruct");
+            var managingUnit = button.getAttribute("data-managingunit");
+            var contactPoint = button.getAttribute("data-contactpoint");
+            var tagNv = button.getAttribute("data-tagnv");
+
+            // Điền dữ liệu vào form
+            document.getElementById("_id").value = systemId;
+            document.getElementById("name").value = systemName || '';
+            document.getElementById("idSystem").value = idSystem || '';
+            document.getElementById("image").value = image || '';
+            document.getElementById("description").value = description || '';
+            document.getElementById("linkAccess").value = linkAccess || '';
+            document.getElementById("linkInstruct").value = linkInstruct || '';
+            document.getElementById("managingUnit").value = managingUnit || '';
+            document.getElementById("contactPoint").value = contactPoint || '';
+            document.getElementById("editTagNv").value = tagNv || '';
+
+            // Hiển thị modal
+            document.getElementById("editModal").style.display = "block";
+        }
+
+        // Xử lý submit của form Edit
+        document.getElementById("editForm").addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            const systemId = data._id; // Lấy _id của system
+            try {
+                const response = await fetch(`/system/${systemId}`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+
+                });
+
+                if (response.ok) {
+                    alert("Cập nhật thành công!");
+                    location.reload(); // Reload trang để cập nhật dữ liệu
+                } else {
+                    alert("Cập nhật thất bại!");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Có lỗi xảy ra khi cập nhật hệ thống.");
+            }
+        });
+        function deleteSystem(button) {
+            // Lấy _id của hệ thống từ thuộc tính data-systemid
+            var systemId = button.getAttribute("data-systemid");
+            // Hiển thị xác nhận xóa
+            if (confirm("Bạn có chắc muốn xóa hệ thống này không?")) {
+                fetch(`/system/${systemId}`, {
+                    method: "DELETE"
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            alert("Hệ thống đã được xóa!");
+                            location.reload();
+                        } else {
+                            alert("Xóa hệ thống thất bại!");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        alert("Có lỗi xảy ra khi xóa hệ thống.");
+                    });
+            }
+        }
     </script>
 </body>
 

@@ -8,10 +8,20 @@ const systemSchema = new mongoose.Schema(
         idSystem: { type: String, required: true },
         image: { type: String, required: false },
         description: String,
-        tagNv: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'tag'
-          }],
+        tagNv: {
+            type: [{
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'tag'
+            }],
+            default: [],
+            set: function (v) {
+                // Nếu v là chuỗi rỗng hoặc mảng chứa chuỗi rỗng, trả về mảng rỗng
+                if (typeof v === 'string' && v.trim() === '') {
+                    return [];
+                }
+                return v;
+            }
+        },
         linkAccess: String,
         linkInstruct: String,
         managingUnit: String,

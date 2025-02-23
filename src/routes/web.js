@@ -20,7 +20,7 @@ router.get('/logout', Logout); //clear token
 //System
 router.get('/system', getListSystem)
 router.post('/system', postSystem)
-router.put('/system/:idSystem', putSystem)
+router.put('/system/:id', putSystem)
 router.delete('/system/:idSystem', deteteSystem)
 
 //người dùng

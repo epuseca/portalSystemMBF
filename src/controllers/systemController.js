@@ -4,7 +4,7 @@ module.exports = {
     getListSystem: async (req, res) => {
         try {
             let results = await System.find({}).populate('tagNv');
-            console.log("Danh sách System:", results); // In ra toàn bộ thông tin của System
+            //console.log("Danh sách System:", results); // In ra toàn bộ thông tin của System
             res.render('system/createSystem.ejs', { systems: results });
 
         } catch (err) {
@@ -23,8 +23,11 @@ module.exports = {
         }
     },
     putSystem: async (req, res) => {
-        const SystemID = req.params.idSystem;
+        
+        const SystemID = req.params.id;
         const newData = req.body;
+        console.log("ID mg sysstem:", SystemID)
+        console.log("new data sysstem:", newData)
         try {
             const updatedData = await System.findByIdAndUpdate(SystemID, newData, { new: true });
             res.status(200).json(updatedData);
