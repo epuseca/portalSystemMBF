@@ -1,12 +1,12 @@
 const System = require('../models/system.js')
+const Tag = require('../models/tag.js')
 
 module.exports = {
     getListSystem: async (req, res) => {
         try {
-            let results = await System.find({}).populate('tagNv');
-            //console.log("Danh sách System:", results); // In ra toàn bộ thông tin của System
-            res.render('system/createSystem.ejs', { systems: results });
-
+            let systems = await System.find({}).populate('tagNv');
+            let tags = await Tag.find({});
+            res.render('system/createSystem.ejs', { systems: systems, tags: tags });
         } catch (err) {
             console.error(err);
             res.status(500).json({ message: 'Internal Server Error' });

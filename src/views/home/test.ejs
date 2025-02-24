@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Sample Layout</title>
+    <title>Mobifone Portal System</title>
     <link rel="stylesheet" href="/css/home/topnav.css">
     <link rel="stylesheet" href="/css/home/login.css">
     <link rel="stylesheet" href="/css/home/topnav_slideshow.css">
@@ -105,7 +105,6 @@
             padding: 2px;
             margin-right: 15px;
         }
-
     </style>
 </head>
 
@@ -113,7 +112,7 @@
 
     <!-- Thanh topnav -->
     <!-- topbar -->
-    <nav class="navbar">
+    <nav style="z-index: 1;" id="navbar" class="navbar">
         <div class="logo">
             <img alt="Logo" src="/images/logo.png">
         </div>
@@ -218,7 +217,7 @@
         <img src="/images/Su-menh.jpg" alt="Banner">
     </div> -->
 
-    <div class="slideshow-container">
+    <div style="margin-top: 64px;" class="slideshow-container">
         <!-- Full-width images with number and caption text -->
         <div class="mySlides fade">
             <div class="numbertext">1 / 3</div>
@@ -243,7 +242,7 @@
         <a class="next" onclick="plusSlides(1)">&#10095;</a>
     </div>
     <!-- The dots/circles can click -->
-    <div style="text-align:right;margin-right: 15px;margin-top: 5px;">
+    <div style="text-align:center;margin-top: 5px;">
         <span class="dot" onclick="currentSlide(1)"></span>
         <span class="dot" onclick="currentSlide(2)"></span>
         <span class="dot" onclick="currentSlide(3)"></span>
@@ -258,18 +257,22 @@
                 <div class="image-row">
                     <% listSystems.forEach(function(system) { %>
                         <% if(system.tagNv.some(function(t) { return t._id.toString()===tag._id.toString(); })) { %>
-                            <a href="/test" style="text-decoration: none; color: inherit;">
+                            <a href="<%= system.linkAccess && system.linkAccess.trim() !== '' ? system.linkAccess : '/' %>"
+                                style="text-decoration: none; color: inherit;">
+
                                 <div class="card_s" style="cursor: pointer;">
                                     <img src="<%= system.image || '/images/Tam-nhin.jpg' %>" alt="Image 5">
-                                    <!-- <p class="small-text">Hệ thống: <%= system.name %>
-                                    </p> -->
-                                    <p class="small-text">
+                                    <p class="small-text">Hệ thống: <%= system.name %>
+                                    </p>
+                                    <p class="small-text">Link: <%= system.linkAccess %>
+                                    </p>
+                                    <!-- <p class="small-text">
                                         Tag nghiệp vụ:
                                         <% system.tagNv.forEach(function(tag, index) { %>
                                             <%= tag.name %>
                                                 <%= index < system.tagNv.length - 1 ? ', ' : '' %>
                                                     <% }); %>
-                                    </p>
+                                    </p> -->
                                     <p class="small-text">Đầu mối quản trị: <%= system.contactPoint %>
                                     </p>
                                 </div>
@@ -285,7 +288,7 @@
 
 
 
-                        
+
 
 </body>
 

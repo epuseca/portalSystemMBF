@@ -1,0 +1,357 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f2f2f241;
+}
+
+.container {
+    width: 75%;
+    margin: 10px 0 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px #ccc;
+    margin-top: 68px;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input[type="submit"] {
+    background-color: #2b7dcf;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #2b7dcf;
+}
+
+button {
+    background-color: #ffffff;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.active_navbar {
+    font-weight: bold;
+}
+
+.sidenav {
+    margin-top: 68px;
+    margin-left: 8px;
+    height: 100%;
+    width: 19%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    overflow-x: hidden;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px #ccc;
+    transition: top 0.3s;
+}
+
+/* Style the sidenav links and the dropdown button */
+.sidenav a,
+.dropdown-btn {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: rgb(43, 125, 207);
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+}
+
+/* On mouse-over */
+.sidenav a:hover,
+.dropdown-btn:hover {
+    color: rgba(43, 125, 207, 0.697);
+}
+
+/* Main content */
+.main {
+    margin-left: 200px;
+    /* Same as the width of the sidenav */
+    font-size: 20px;
+    /* Increased text to enable scrolling */
+    padding: 0px 10px;
+}
+
+/* Add an active class to the active dropdown button */
+.active {
+    background-color: rgb(38, 127, 215);
+    color: white;
+}
+
+.active:hover {
+    color: white;
+}
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.dropdown-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+
+/* Optional: Style the caret down icon */
+.fa-caret-down {
+    float: right;
+    padding-right: 8px;
+}
+
+.fa-caret-right {
+    margin-right: 20px;
+}
+
+table,
+td,
+th {
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,
+td {
+    padding: 15px;
+}
+
+.edit-btn {
+    background-color: #2b7dcf;
+    /* Màu nền */
+    color: #fff;
+    /* Màu chữ */
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.edit-btn:hover {
+    background-color: #1a5a9c;
+}
+
+.center-title-list-system {
+    text-align: center;
+}
+
+/* CSS cho Modal Edit Form */
+.edit-modal {
+    display: none;
+    /* Ẩn modal khi chưa mở */
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 25px;
+}
+
+.edit-modal-content {
+    background-color: #fefefe;
+    margin: 0% auto 15% auto;
+    /* Canh giữa modal */
+    border: 1px solid #888;
+    width: 60%;
+}
+
+.edit-close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.edit-close:hover,
+.edit-close:focus {
+    color: red;
+    cursor: pointer;
+}
+
+.edit-animate {
+    -webkit-animation: edit-animatezoom 0.6s;
+    animation: edit-animatezoom 0.6s;
+}
+
+@-webkit-keyframes edit-animatezoom {
+    from {
+        -webkit-transform: scale(0)
+    }
+
+    to {
+        -webkit-transform: scale(1)
+    }
+}
+
+@keyframes edit-animatezoom {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+.edit-container {
+    padding: 20px;
+
+}
+
+.edit-container label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.edit-container input[type=text],
+.edit-container textarea {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.edit-save-form {
+    background-color: #3387e7;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.edit-container button:hover {
+    opacity: 0.8;
+}
+
+.edit-cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+
+.edit-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    /* Khoảng cách giữa 2 cột */
+}
+
+.edit-col {
+    flex: 1;
+}
+
+.delete-btn {
+    background-color: #2b7dcf;
+    /* Màu nền đỏ */
+    color: #fff;
+    /* Màu chữ trắng */
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 5px;
+    /* Tùy chọn để có khoảng cách so với nút Edit */
+}
+
+.delete-btn:hover {
+    background-color: #2b7dcf;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    /* Khoảng cách giữa 2 nút */
+    align-items: center;
+}
+
+.chosse-tag-create {
+    background-color: white; 
+    color: #2b7dcf;             
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: 1px solid #2b7dcf;
+    margin-left: 100px;
+    width: 500px;
+}
+
+.chosse-tag-create:hover {
+    background-color: #2b7dcf1f;
+    color: #2b7dcf;
+}
+.tag-item {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Khoảng cách giữa label và checkbox */
+    margin-bottom: 5px; /* Khoảng cách giữa các dòng */
+  }
+  .tag-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.tag-item label {
+    flex: 3;        /* Label chiếm 3 phần trong tổng số 4 phần */
+    text-align: left;
+}
+
+.tag-item input {
+    flex: 1;        /* Checkbox chiếm 1 phần */
+    margin-left: 10px; /* Tạo khoảng cách giữa label và checkbox */
+}
+.tag-row {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Khoảng cách giữa label và nút */
+    margin-bottom: 10px;
+  }
+  
+  .tag-label {
+    flex: 2; /* Label chiếm không gian nhiều hơn */
+    font-size: 16px;
+  }
+  

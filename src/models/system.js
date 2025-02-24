@@ -14,14 +14,17 @@ const systemSchema = new mongoose.Schema(
                 ref: 'tag'
             }],
             default: [],
-            set: function (v) {
-                // Nếu v là chuỗi rỗng hoặc mảng chứa chuỗi rỗng, trả về mảng rỗng
-                if (typeof v === 'string' && v.trim() === '') {
-                    return [];
+            set: function(v) {
+                if (typeof v === 'string') {
+                    // Loại bỏ dấu ngoặc vuông và dấu nháy, sau đó tách theo dấu phẩy
+                    v = v.replace(/[\[\]']+/g, ""); // Loại bỏ [ , ] và '
+                    const arr = v.split(",").map(item => item.trim()).filter(item => item !== "");
+                    return arr;
                 }
                 return v;
             }
-        },
+        }
+        ,
         linkAccess: String,
         linkInstruct: String,
         managingUnit: String,

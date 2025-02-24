@@ -6,310 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create System</title>
     <link rel="stylesheet" href="/css/home/topnav.css">
+    <link rel="stylesheet" href="/css/home/system/system.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background-color: #f2f2f241;
-        }
-
-        .container {
-            width: 75%;
-            margin: 10px 0 0 auto;
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px 0px #ccc;
-        }
-
-        input,
-        select,
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        input[type="submit"] {
-            background-color: #04AA6D;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-
-        button {
-            background-color: #ffffff;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        button:hover {
-            opacity: 0.8;
-        }
-
-        .active_navbar {
-            font-weight: bold;
-        }
-
-        .sidenav {
-            margin-top: 80px;
-            margin-left: 8px;
-            height: 100%;
-            width: 19%;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: 0;
-            background-color: #ffffff;
-            overflow-x: hidden;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px 0px #ccc;
-        }
-
-        /* Style the sidenav links and the dropdown button */
-        .sidenav a,
-        .dropdown-btn {
-            padding: 6px 8px 6px 16px;
-            text-decoration: none;
-            font-size: 20px;
-            color: rgb(43, 125, 207);
-            display: block;
-            border: none;
-            background: none;
-            width: 100%;
-            text-align: left;
-            cursor: pointer;
-            outline: none;
-        }
-
-        /* On mouse-over */
-        .sidenav a:hover,
-        .dropdown-btn:hover {
-            color: rgba(43, 125, 207, 0.697);
-        }
-
-        /* Main content */
-        .main {
-            margin-left: 200px;
-            /* Same as the width of the sidenav */
-            font-size: 20px;
-            /* Increased text to enable scrolling */
-            padding: 0px 10px;
-        }
-
-        /* Add an active class to the active dropdown button */
-        .active {
-            background-color: rgb(38, 127, 215);
-            color: white;
-        }
-
-        .active:hover {
-            color: white;
-        }
-
-        /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
-        .dropdown-container {
-            display: none;
-            background-color: rgba(43, 125, 207, 0);
-            padding-left: 8px;
-        }
-
-        /* Optional: Style the caret down icon */
-        .fa-caret-down {
-            float: right;
-            padding-right: 8px;
-        }
-
-        .fa-caret-right {
-            margin-right: 20px;
-        }
-
-        table,
-        td,
-        th {
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        th,
-        td {
-            padding: 15px;
-        }
-
-        .edit-btn {
-            background-color: #2b7dcf;
-            /* Màu nền */
-            color: #fff;
-            /* Màu chữ */
-            border: none;
-            padding: 8px 12px;
-            font-size: 14px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .edit-btn:hover {
-            background-color: #1a5a9c;
-        }
-
-        .center-title-list-system {
-            text-align: center;
-        }
-
-        /* CSS cho Modal Edit Form */
-        .edit-modal {
-            display: none;
-            /* Ẩn modal khi chưa mở */
-            position: fixed;
-            z-index: 2;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
-            padding-top: 25px;
-        }
-
-        .edit-modal-content {
-            background-color: #fefefe;
-            margin: 0% auto 15% auto;
-            /* Canh giữa modal */
-            border: 1px solid #888;
-            width: 60%;
-        }
-
-        .edit-close {
-            position: absolute;
-            right: 25px;
-            top: 0;
-            color: #000;
-            font-size: 35px;
-            font-weight: bold;
-        }
-
-        .edit-close:hover,
-        .edit-close:focus {
-            color: red;
-            cursor: pointer;
-        }
-
-        .edit-animate {
-            -webkit-animation: edit-animatezoom 0.6s;
-            animation: edit-animatezoom 0.6s;
-        }
-
-        @-webkit-keyframes edit-animatezoom {
-            from {
-                -webkit-transform: scale(0)
-            }
-
-            to {
-                -webkit-transform: scale(1)
-            }
-        }
-
-        @keyframes edit-animatezoom {
-            from {
-                transform: scale(0)
-            }
-
-            to {
-                transform: scale(1)
-            }
-        }
-
-        .edit-container {
-            padding: 20px;
-
-        }
-
-        .edit-container label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .edit-container input[type=text],
-        .edit-container textarea {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-        }
-
-        .edit-container button {
-            background-color: #3387e7;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        .edit-container button:hover {
-            opacity: 0.8;
-        }
-
-        .edit-cancelbtn {
-            width: auto;
-            padding: 10px 18px;
-            background-color: #f44336;
-        }
-
-        .edit-row {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            /* Khoảng cách giữa 2 cột */
-        }
-
-        .edit-col {
-            flex: 1;
-        }
-
-        .delete-btn {
-            background-color: #f44336;
-            /* Màu nền đỏ */
-            color: #fff;
-            /* Màu chữ trắng */
-            border: none;
-            padding: 8px 12px;
-            font-size: 14px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-top: 5px;
-            /* Tùy chọn để có khoảng cách so với nút Edit */
-        }
-
-        .delete-btn:hover {
-            background-color: #d32f2f;
-        }
-    </style>
+    <script src="/scripts/system/system.js"></script>
 </head>
 
 <body>
-    <nav class="navbar">
+    <nav id="navbar" class="navbar">
         <div class="logo">
             <img alt="Logo" src="/images/logo.png">
         </div>
@@ -361,7 +64,7 @@
             </button>
         </div>
 
-        <div class="sidenav">
+        <div id="sidenav" class="sidenav">
             <button class="dropdown-btn"> Hệ thống
                 <i class="fa fa-caret-down"></i>
             </button>
@@ -374,8 +77,8 @@
             </button>
             <div class="dropdown-container">
 
-                <a href="#"> <i class="fa fa-caret-right"></i>Xem các tag nghiệp vụ</a>
-                <a href="#"><i class="fa fa-caret-right"></i>Thêm tag nghiệp vụ</a>
+                <a id="showListTag" href="#"> <i class="fa fa-caret-right"></i>Xem các tag nghiệp vụ</a>
+                <a id="showCreateTag" href="#"><i class="fa fa-caret-right"></i>Thêm tag nghiệp vụ</a>
             </div>
             <a href="#contact">Search</a>
         </div>
@@ -447,25 +150,33 @@
                         <%= system.contactPoint %>
                     </td>
                     <td>
-                        <button class="edit-btn" style="width:auto;" data-systemid="<%= system._id %>"
-                            data-name="<%= system.name %>" data-idsystem="<%= system.idSystem %>"
-                            data-image="<%= system.image %>" data-description="<%= system.description %>"
-                            data-linkaccess="<%= system.linkAccess %>" data-linkinstruct="<%= system.linkInstruct %>"
-                            data-managingunit="<%= system.managingUnit %>"
-                            data-contactpoint="<%= system.contactPoint %>"
-                            data-tagnv="<%= system.tagNv && system.tagNv.length > 0 ? system.tagNv.map(function(tag){ return tag.name; }).join(', ') : '' %>"
-                            onclick="openEditModal(this)">
-                            Edit
-                        </button>
-                        <button class="delete-btn" style="width:auto;" data-systemid="<%= system._id %>"
-                            onclick="deleteSystem(this)">
-                            Delete
-                        </button>
+                        <div class="action-buttons">
+                            <button class="edit-btn" style="width:auto;" data-systemid="<%= system._id %>"
+                                data-name="<%= system.name %>" data-idsystem="<%= system.idSystem %>"
+                                data-image="<%= system.image %>" data-description="<%= system.description %>"
+                                data-linkaccess="<%= system.linkAccess %>"
+                                data-linkinstruct="<%= system.linkInstruct %>"
+                                data-managingunit="<%= system.managingUnit %>"
+                                data-contactpoint="<%= system.contactPoint %>"
+                                data-tagnv="<%= system.tagNv && system.tagNv.length > 0 ? system.tagNv.map(function(tag){ return tag.name; }).join(', ') : '' %>"
+                                onclick="openEditModal(this)">
+                                Edit
+                            </button>
+                            <button class="delete-btn" style="width:auto;" data-systemid="<%= system._id %>"
+                                onclick="deleteSystem(this)">
+                                Delete
+                            </button>
+                        </div>
                     </td>
+
                 </tr>
                 <% }); %>
         </table>
     </div>
+
+
+
+
     <!-- Modal Edit Form -->
     <div id="editModal" class="edit-modal">
         <form id="editForm" class="edit-modal-content edit-animate" action="/system/edit" method="post">
@@ -478,8 +189,8 @@
                 <h1 style="margin-top: 10px;">Chỉnh sửa hệ thống</h1>
 
                 <!-- Trường ẩn lưu _id của hệ thống (MongoDB _id) -->
-                <!-- <input type="hidden" id="_id" name="_id"> -->
-                <input id="_id" name="_id">
+                <input type="hidden" id="_id" name="_id">
+                <!-- <input id="_id" name="_id"> -->
 
                 <!-- Tên hệ thống và ID hệ thống trên cùng 1 dòng -->
                 <div class="edit-row">
@@ -499,8 +210,16 @@
                 <label for="description"><b>Mô tả</b></label>
                 <textarea placeholder="Nhập mô tả" name="description" id="description"></textarea>
 
-                <label for="editTagNv"><b>Tag nghiệp vụ</b></label>
-                <input type="text" placeholder="Nhập tag nghiệp vụ" name="editTagNv" id="editTagNv">
+                <!-- Trong Modal Edit Form -->
+                <div style="margin-right: 30px;" class="tag-row">
+                    <label for="editTagNv" class="tag-label">Tag nghiệp vụ</label>
+
+                    <button type="button" class="chosse-tag-create" onclick="openTagModal('edit')">Chọn Tag</button>
+
+                </div><input type="hidden" id="editTagNv" name="tagNv">
+                <div id="selectedEditTags"
+                    style="margin-top: 5px; margin-bottom: 10px; margin-left: 20px; font-size: 0.9rem; color: #333;">
+                </div>
 
                 <div class="edit-row">
                     <div class="edit-col">
@@ -520,55 +239,134 @@
                     </div>
                     <div class="edit-col">
                         <label for="contactPoint"><b>Đầu mối quản trị</b></label>
-                        <input type="text" placeholder="Nhập đầu mối quản trị" name="contactPoint" id="contactPoint"
-                            required>
+                        <input type="text" placeholder="Nhập đầu mối quản trị" name="contactPoint" id="contactPoint">
                     </div>
                 </div>
 
-                <button type="submit">Lưu thay đổi</button>
-                <button type="button" onclick="document.getElementById('editModal').style.display='none'"
-                    class="edit-cancelbtn">Hủy</button>
+                <button class="edit-save-form" type="submit">Lưu thay đổi</button>
+                <!-- <button type="button" onclick="document.getElementById('editModal').style.display='none'"
+                    class="edit-cancelbtn">Hủy</button> -->
             </div>
 
         </form>
     </div>
-
-
 
     <!-- Create system form -->
     <div id="createSystemContainer" class="container" style="display: none;">
         <!-- <div class="container"> -->
         <h1>Tạo mới hệ thống</h1>
         <form id="createSystemForm">
-            <label for="name">Tên hệ thống</label>
-            <input type="text" id="name" name="name" required>
+            <div class="edit-row">
+                <div class="edit-col" style="margin-right: 30px;">
+                    <label for="name">Tên hệ thống</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="edit-col" style="margin-right: 30px;">
+                    <label for="idSystem">ID hệ thống</label>
+                    <input type="text" id="idSystem" name="idSystem" required>
+                </div>
+            </div>
 
-            <label for="idSystem">ID hệ thống</label>
-            <input type="text" id="idSystem" name="idSystem" required>
+            <div style="margin-right: 30px;">
+                <label for="image">Link ảnh</label>
+                <input type="text" id="image" name="image">
 
-            <label for="image">Link ảnh</label>
-            <input type="text" id="image" name="image">
+            </div>
+            <div style="margin-right: 30px;">
+                <label for="description">Mô tả</label>
+                <textarea id="description" name="description"></textarea>
+            </div>
 
-            <label for="description">Mô tả</label>
-            <textarea id="description" name="description"></textarea>
+            <div style="margin-right: 30px;">
+                <label for="tagNv">Tag nghiệp vụ</label>
+                <!-- Nút mở modal chọn tag -->
+                <button class="chosse-tag-create" type="button" onclick="openTagModal()">Chọn Tag</button>
+                <!-- Input ẩn để lưu danh sách tag được chọn -->
+                <input type="hidden" id="tagNv" name="tagNv">
+                <!-- Hiển thị các tag đã chọn (có thể hiển thị tên tag) -->
+                <div id="selectedTags"
+                    style="margin-top: 5px; margin-bottom: 10px;margin-left: 20px; font-size: 0.9rem; color: #333;">
+                </div>
+            </div>
 
-            <label for="tagNv">Tag nghiệp vụ</label>
-            <input type="text" id="tagNv" name="tagNv">
 
-            <label for="linkAccess">Link truy cập hệ thống</label>
-            <input type="text" id="linkAccess" name="linkAccess">
+            <div class="edit-row">
+                <div class="edit-col" style="margin-right: 30px;">
+                    <label for="linkAccess">Link truy cập hệ thống</label>
+                    <input type="text" id="linkAccess" name="linkAccess">
+                </div>
+                <div class="edit-col" style="margin-right: 30px;">
+                    <label for="linkInstruct">Tài liệu hướng dẫn sử dụng</label>
+                    <input type="text" id="linkInstruct" name="linkInstruct">
+                </div>
+            </div>
 
-            <label for="linkInstruct">Tài liệu hướng dẫn sử dụng</label>
-            <input type="text" id="linkInstruct" name="linkInstruct">
+            <div class="edit-row">
+                <div class="edit-col" style="margin-right: 30px;">
+                    <label for="managingUnit">Đơn vị chủ quản</label>
+                    <input type="text" id="managingUnit" name="managingUnit">
+                </div>
+                <div class="edit-col" style="margin-right: 30px;">
+                    <label for="contactPoint">Đầu mối quản trị</label>
+                    <input type="text" id="contactPoint" name="contactPoint">
+                </div>
+            </div>
 
-            <label for="managingUnit">Đơn vị chủ quản</label>
-            <input type="text" id="managingUnit" name="managingUnit">
-
-            <label for="contactPoint">Đầu mối quản trị</label>
-            <input type="text" id="contactPoint" name="contactPoint">
-
-            <input type="submit" value="Create System">
+            <input type="submit" value="Tạo hệ thống mới">
         </form>
+    </div>
+
+    <!-- Modal chọn Tag -->
+    <div id="tagModal" class="edit-modal" style="padding-top: 50px;">
+        <div class="edit-modal-content" style="width: 40%;">
+            <div style="padding: 10px; border-bottom: 1px solid #ccc; position: relative;">
+                <h2 style="margin: 0;">Chọn Tag</h2>
+                <span onclick="closeTagModal()" class="edit-close" style="position: absolute; right: 10px; top: 5px;"
+                    title="Close Modal">&times;</span>
+            </div>
+            <div style="padding: 20px; max-height: 300px; overflow-y: auto;">
+                <% tags.forEach(function(tag) { %>
+                    <div class="tag-item">
+                        <label for="tag-<%= tag._id %>">
+                            <%= tag.name %>
+                        </label>
+                        <input type="checkbox" class="tag-checkbox" id="tag-<%= tag._id %>" value="<%= tag._id %>">
+                    </div>
+                    <% }); %>
+
+            </div>
+            <div style="padding: 10px; text-align: right; border-top: 1px solid #ccc;">
+                <button type="button" onclick="confirmTagSelection()"
+                    style="background-color: #2b7dcf; color: #fff; border: none; padding: 8px 12px; border-radius: 4px;">
+                    Xác nhận
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Danh sách tag nghiệp vụ -->
+    <div id="listTagContainer" class="container" style="display: none;">
+        <h1>Danh sách tag nghiệp vụ</h1>
+        <table>
+            <tr>
+                <th class="center-title-list-system">ID</th>
+                <th class="center-title-list-system">Name</th>
+                <th class="center-title-list-system">Description</th>
+            </tr>
+            <% tags.forEach(function(tag) { %>
+                <tr>
+                    <td>
+                        <%= tag._id %>
+                    </td>
+                    <td>
+                        <%= tag.name %>
+                    </td>
+                    <td>
+                        <%= tag.description %>
+                    </td>
+                </tr>
+                <% }); %>
+        </table>
     </div>
 
     <script>
@@ -586,10 +384,10 @@
                 });
 
                 if (response.ok) {
-                    alert("System created successfully!");
+                    alert("Tạo hệ thống mới thành công!");
                     this.reset();
                 } else {
-                    alert("Failed to create system.");
+                    alert("Tạo hệ thống thất bại!!!!");
                 }
             } catch (error) {
                 console.error("Error:", error);
@@ -599,19 +397,20 @@
 
         //Drop btn
         var dropdown = document.getElementsByClassName("dropdown-btn");
-        var i;
 
-        for (i = 0; i < dropdown.length; i++) {
+        for (let i = 0; i < dropdown.length; i++) {
             dropdown[i].addEventListener("click", function () {
                 this.classList.toggle("active");
                 var dropdownContent = this.nextElementSibling;
-                if (dropdownContent.style.display === "block") {
-                    dropdownContent.style.display = "none";
+
+                if (dropdownContent.style.maxHeight) {
+                    dropdownContent.style.maxHeight = null; // Thu gọn
                 } else {
-                    dropdownContent.style.display = "block";
+                    dropdownContent.style.maxHeight = dropdownContent.scrollHeight + "px"; // Mở rộng
                 }
             });
         }
+
 
         // Lấy phần tử modal edit form
         var editModal = document.getElementById('editModal');
@@ -628,6 +427,8 @@
             event.preventDefault();
             document.getElementById("listSystemContainer").style.display = "block";
             document.getElementById("createSystemContainer").style.display = "none";
+            document.getElementById("listTagContainer").style.display = "none";
+
         });
 
         // Lắng nghe sự kiện click vào "Thêm hệ thống"
@@ -635,7 +436,18 @@
             event.preventDefault();
             document.getElementById("listSystemContainer").style.display = "none";
             document.getElementById("createSystemContainer").style.display = "block";
+            document.getElementById("listTagContainer").style.display = "none";
+
         });
+
+        //Lắng nghe showListTag để bật Hiển thị hệ thống
+        document.getElementById("showListTag").addEventListener("click", function (event) {
+            event.preventDefault();
+            document.getElementById("listSystemContainer").style.display = "none";
+            document.getElementById("createSystemContainer").style.display = "none";
+            document.getElementById("listTagContainer").style.display = "block";
+        });
+
         function openEditModal(button) {
             // Lấy dữ liệu từ thuộc tính data của nút Edit
             var systemId = button.getAttribute("data-systemid");
