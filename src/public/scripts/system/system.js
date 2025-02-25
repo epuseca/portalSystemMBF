@@ -24,15 +24,10 @@ var currentTagTarget = "create"; // mặc định cho create
 // Hàm mở modal chọn tag; target là "create" hoặc "edit"
 function openTagModal(target) {
     currentTagTarget = target;
-    // Nếu là edit, pre-check các checkbox theo giá trị hiện có trong input ẩn
     if (target === "edit") {
         var selected = document.getElementById('editTagNv').value.split(',').map(s => s.trim()).filter(s => s !== "");
         document.querySelectorAll('.tag-checkbox').forEach(function(cb) {
-            if (selected.indexOf(cb.value) !== -1) {
-                cb.checked = true;
-            } else {
-                cb.checked = false;
-            }
+            cb.checked = selected.indexOf(cb.value) !== -1;
         });
     } else {
         // Nếu là create, reset tất cả checkbox
@@ -42,6 +37,7 @@ function openTagModal(target) {
     }
     document.getElementById('tagModal').style.display = 'block';
 }
+
 
 // Hàm đóng modal chọn tag
 function closeTagModal() {

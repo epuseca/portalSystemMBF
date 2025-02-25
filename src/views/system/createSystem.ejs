@@ -95,7 +95,19 @@
     <!-- List system form -->
     <div id="listSystemContainer" class="container">
         <!-- <div class="container" style="display: none;"></div> -->
-        <h1>Danh sách hệ thống</h1>
+        <div class="list-header">
+            <h1>Danh sách hệ thống</h1>
+            <div class="search-refresh-group">
+                <a href="/system" class="refresh-btn"><i class="fa fa-refresh"></i></a>
+                <form class="example" action="/system/search" method="get" style="max-width:300px;">
+                    <input type="text" placeholder="Tìm kiếm hệ thống..." name="name">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+        </div>
+
+
+
         <table>
             <tr>
                 <th class="center-title-list-system">Tên</th>
@@ -158,7 +170,7 @@
                                 data-linkinstruct="<%= system.linkInstruct %>"
                                 data-managingunit="<%= system.managingUnit %>"
                                 data-contactpoint="<%= system.contactPoint %>"
-                                data-tagnv="<%= system.tagNv && system.tagNv.length > 0 ? system.tagNv.map(function(tag){ return tag.name; }).join(', ') : '' %>"
+                                data-tagnv="<%= system.tagNv && system.tagNv.length > 0 ? system.tagNv.map(function(tag){ return tag._id; }).join(',') : '' %>"
                                 onclick="openEditModal(this)">
                                 Edit
                             </button>
@@ -172,6 +184,31 @@
                 </tr>
                 <% }); %>
         </table>
+        <div class="pagination">
+            <% if (searchQuery && searchQuery.trim() !== "") { %>
+              
+              <% for (var i = 1; i <= totalPages; i++) { %>
+                <% if (i === currentPage) { %>
+                  <span class="current-page"><%= i %></span>
+                <% } else { %>
+                  <a href="/system/search?name=<%= encodeURIComponent(searchQuery) %>&page=<%= i %>"><%= i %></a>
+                <% } %>
+              <% } %>
+              
+            <% } else { %>
+              
+              <% for (var i = 1; i <= totalPages; i++) { %>
+                <% if (i === currentPage) { %>
+                  <span class="current-page"><%= i %></span>
+                <% } else { %>
+                  <a href="/system?page=<%= i %>"><%= i %></a>
+                <% } %>
+              <% } %>
+              
+            <% } %>
+          </div>
+          
+        
     </div>
 
 
@@ -385,7 +422,8 @@
 
                 if (response.ok) {
                     alert("Tạo hệ thống mới thành công!");
-                    this.reset();
+                    // this.reset();
+                    location.href = "/system";
                 } else {
                     alert("Tạo hệ thống thất bại!!!!");
                 }

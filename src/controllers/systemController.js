@@ -4,14 +4,65 @@ const Tag = require('../models/tag.js')
 module.exports = {
     getListSystem: async (req, res) => {
         try {
-            let systems = await System.find({}).populate('tagNv');
+            let page = parseInt(req.query.page) || 1;
+            let limit = 6; // mỗi trang 6 dòng
+            let skip = (page - 1) * limit;
+    
+            let systems = await System.find({})
+                .populate('tagNv')
+                .skip(skip)
+                .limit(limit);
             let tags = await Tag.find({});
-            res.render('system/createSystem.ejs', { systems: systems, tags: tags });
+    
+            let count = await System.countDocuments();
+            let totalPages = Math.ceil(count / limit);
+    
+            // Thêm searchQuery là chuỗi rỗng khi không có từ khóa tìm kiếm
+            res.render('system/createSystem.ejs', { 
+                systems: systems, 
+                tags: tags, 
+                currentPage: page, 
+                totalPages: totalPages,
+                searchQuery: ""  // Thêm biến này
+            });
         } catch (err) {
             console.error(err);
             res.status(500).json({ message: 'Internal Server Error' });
         }
-    },
+    }
+    
+,    
+searchSystem: async (req, res) => {
+    try {
+        const searchQuery = req.query.name || "";
+        let page = parseInt(req.query.page) || 1;
+        let limit = 6; // mỗi trang 6 dòng
+        let skip = (page - 1) * limit;
+
+        // Lấy danh sách hệ thống thỏa mãn điều kiện tìm kiếm
+        let systems = await System.find({ name: { $regex: searchQuery, $options: 'i' } })
+                                   .populate('tagNv')
+                                   .skip(skip)
+                                   .limit(limit);
+        let tags = await Tag.find({});
+
+        // Đếm tổng số hệ thống thỏa mãn để tính số trang
+        let count = await System.countDocuments({ name: { $regex: searchQuery, $options: 'i' } });
+        let totalPages = Math.ceil(count / limit);
+
+        res.render('system/createSystem.ejs', {
+            systems: systems,
+            tags: tags,
+            currentPage: page,
+            totalPages: totalPages,
+            searchQuery: searchQuery // (nếu bạn muốn hiển thị từ khóa search)
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+}
+,
     postSystem: async (req, res) => {
         const newData = req.body;
         try {
@@ -23,7 +74,7 @@ module.exports = {
         }
     },
     putSystem: async (req, res) => {
-        
+
         const SystemID = req.params.id;
         const newData = req.body;
         console.log("ID mg sysstem:", SystemID)

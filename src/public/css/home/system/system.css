@@ -133,6 +133,9 @@ th {
     border: 1px solid #ddd;
     text-align: left;
 }
+table td{
+    font-size: 13px;    
+}
 
 table {
     border-collapse: collapse;
@@ -141,7 +144,7 @@ table {
 
 th,
 td {
-    padding: 15px;
+    padding: 8px;
 }
 
 .edit-btn {
@@ -355,3 +358,80 @@ td {
     font-size: 16px;
   }
   
+  form.example input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f152;
+    box-sizing: border-box;
+    border-radius: 0;
+  }
+  
+  form.example button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid rgba(128, 128, 128, 0);
+    border-left: none;
+    cursor: pointer;
+    margin: 10px 0;
+  }
+  
+  form.example button:hover {
+    background: #0b7dda;
+  }
+  
+  form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  .list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .search-refresh-group {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Khoảng cách giữa nút refresh và form */
+  }
+  
+  .refresh-btn {
+    font-size: 24px;
+    color: #2b7dcf;
+    text-decoration: none;
+  }
+  
+  .refresh-btn:hover {
+    color: #1a5a9c;
+  }
+  .pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination a, .pagination span {
+    margin: 0 5px;
+    padding: 8px 12px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    color: #2b7dcf;
+}
+
+.pagination a:hover {
+    background-color: #f1f1f1;
+}
+
+.pagination .current-page {
+    background-color: #2b7dcf;
+    color: #fff;
+    border: 1px solid #2b7dcf;
+}

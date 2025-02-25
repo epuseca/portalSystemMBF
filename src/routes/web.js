@@ -4,7 +4,7 @@ const middleware = require('../middleware/middleware')
 
 const { getHomePage, getRenderPic } = require('../controllers/homeController');
 const { loginUser, getMain, Login, Logout, getProfile, test } = require('../controllers/mainController')
-const { getListSystem, postSystem, putSystem, deteteSystem } = require('../controllers/systemController.js')
+const { getListSystem, postSystem, putSystem, deteteSystem, searchSystem } = require('../controllers/systemController.js')
 const { getListTag, postTag, putTag, deteteTag } = require('../controllers/tagController.js')
 const { getListUser, postUser, putUser, deteteUser } = require('../controllers/userController.js')
 
@@ -19,6 +19,7 @@ router.get('/logout', Logout); //clear token
 
 //System
 router.get('/system', getListSystem)
+router.get('/system/search', searchSystem);
 router.post('/system', postSystem)
 router.put('/system/:id', putSystem)
 router.delete('/system/:idSystem', deteteSystem)
