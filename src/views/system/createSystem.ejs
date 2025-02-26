@@ -393,8 +393,9 @@
     <div id="listTagContainer" class="container" style="display: none;">
         <div class="list-header">
             <h1>Danh sách tag nghiệp vụ</h1>
+            <button style="width: 30px;" id="refreshTagBtn" class="refresh-btn"><i class="fa fa-refresh"></i></button>
         </div>
-        <table>
+        <table id="tagTable">
             <tr>
                 <th class="center-title-list-system">ID</th>
                 <th class="center-title-list-system">Name</th>
@@ -418,14 +419,89 @@
                             Delete
                         </button>
                     </td>
-
                 </tr>
                 <% }); %>
         </table>
     </div>
 
+    <!-- Create tag form -->
+    <div id="createTagContainer" class="container" style="display: none;">
+        <!-- <div class="container"> -->
+        <h1>Tạo mới tag nghiệp vụ</h1>
+        <form id="createTagForm">
+            <div class="edit-col" style="margin-right: 30px;">
+                <label for="name">Tên tag nghiệp vụ</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div style="margin-right: 30px;">
+                <label for="description">Mô tả</label>
+                <textarea id="description" name="description"></textarea>
+            </div>
+
+            <input type="submit" value="Tạo tag mới">
+        </form>
+    </div>
 
     <script>
+        // Hàm cập nhật lại bảng tag dựa trên danh sách tag nhận được
+        function updateTagTable(tags) {
+            const table = document.getElementById("tagTable");
+            // Xóa hết các dòng cũ (trừ dòng header)
+            table.innerHTML = `
+    <tr>
+      <th class="center-title-list-system">ID</th>
+      <th class="center-title-list-system">Name</th>
+      <th class="center-title-list-system">Description</th>
+      <th>Nút</th>
+    </tr>
+  `;
+
+            tags.forEach(tag => {
+                const tr = document.createElement("tr");
+
+                const tdId = document.createElement("td");
+                tdId.textContent = tag._id;
+                tr.appendChild(tdId);
+
+                const tdName = document.createElement("td");
+                tdName.textContent = tag.name;
+                tr.appendChild(tdName);
+
+                const tdDesc = document.createElement("td");
+                tdDesc.textContent = tag.description || "";
+                tr.appendChild(tdDesc);
+
+                const tdAction = document.createElement("td");
+                const delBtn = document.createElement("button");
+                delBtn.classList.add("delete-btn");
+                delBtn.textContent = "Delete";
+                delBtn.style.width = "auto";
+                delBtn.setAttribute("data-tagid", tag._id);
+                delBtn.onclick = function () { deleteTag(delBtn); };
+                tdAction.appendChild(delBtn);
+                tr.appendChild(tdAction);
+
+                table.appendChild(tr);
+            });
+        }
+
+        // Sự kiện cho nút refresh danh sách tag
+        document.getElementById("refreshTagBtn").addEventListener("click", async function () {
+            try {
+                const response = await fetch("/tag/api");
+                if (response.ok) {
+                    const tags = await response.json();
+                    updateTagTable(tags);
+                } else {
+                    alert("Không thể lấy danh sách tag!");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Có lỗi xảy ra khi làm mới danh sách tag.");
+            }
+        });
+
+        // Create system js
         document.getElementById("createSystemForm").addEventListener("submit", async function (event) {
             event.preventDefault();
             const formData = new FormData(this); // Lấy tất cả các field, bao gồm file
@@ -450,7 +526,31 @@
                 alert("An error occurred while creating the system.");
             }
         });
+        // Create tag js
+        document.getElementById("createTagForm").addEventListener("submit", async function (event) {
+            event.preventDefault();
+            const formData = new FormData(this); // Lấy tất cả các field, bao gồm file
 
+            try {
+                const response = await fetch("/tag", {
+                    method: "POST",
+                    body: formData
+                    // Lưu ý: không cần thiết lập header "Content-Type" vì trình duyệt sẽ tự động thiết lập multipart/form-data cùng boundary
+                });
+
+                if (response.ok) {
+                    alert("Tạo tag mới thành công!");
+                    this.reset();
+                    // Bạn có thể reload trang hoặc điều hướng lại trang /system
+                    // location.href = "/system";
+                } else {
+                    alert("Tạo tag thất bại!!!!");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("An error occurred while creating the system.");
+            }
+        });
 
         //Drop btn
         var dropdown = document.getElementsByClassName("dropdown-btn");
@@ -485,6 +585,7 @@
             location.href = "#listSystem";
             document.getElementById("listSystemContainer").style.display = "block";
             document.getElementById("createSystemContainer").style.display = "none";
+            document.getElementById("createTagContainer").style.display = "none";
             document.getElementById("listTagContainer").style.display = "none";
 
 
@@ -496,6 +597,7 @@
             location.href = "#createSystem";
             document.getElementById("listSystemContainer").style.display = "none";
             document.getElementById("createSystemContainer").style.display = "block";
+            document.getElementById("createTagContainer").style.display = "none";
             document.getElementById("listTagContainer").style.display = "none";
 
         });
@@ -507,6 +609,17 @@
             document.getElementById("listSystemContainer").style.display = "none";
             document.getElementById("createSystemContainer").style.display = "none";
             document.getElementById("listTagContainer").style.display = "block";
+            document.getElementById("createTagContainer").style.display = "none";
+
+        });
+        //Lắng nghe showListTag để bật Hiển thị hệ thống
+        document.getElementById("showCreateTag").addEventListener("click", function (event) {
+            event.preventDefault();
+            location.href = "#createTag";
+            document.getElementById("listSystemContainer").style.display = "none";
+            document.getElementById("createSystemContainer").style.display = "none";
+            document.getElementById("listTagContainer").style.display = "none";
+            document.getElementById("createTagContainer").style.display = "block";
         });
 
         function openEditModal(button) {

@@ -1,6 +1,15 @@
 const Tag = require('../models/tag.js')
 
 module.exports = {
+    getListTagJson: async (req, res) => {
+        try {
+            let tags = await Tag.find({});
+            res.status(200).json(tags);
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({ message: 'Internal Server Error' });
+        }
+    },
     getListTag: async (req, res) => {
         try {
             let results = await Tag.find({});
