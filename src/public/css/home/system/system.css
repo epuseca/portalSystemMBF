@@ -435,3 +435,19 @@ td {
     color: #fff;
     border: 1px solid #2b7dcf;
 }
+
+.add-tag-btn {
+    background-color: #2b7dcf;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 200px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-tag-btn:hover {
+    background-color: #1a5a9c;
+  }

@@ -9,23 +9,23 @@ const uploadSingleFile = async (fileObject) => {
     let baseName = path.basename(fileObject.name, extName);
     let finalName = `${baseName}-${Date.now()}${extName}`;
     let finalPath = path.join(uploadPath, finalName);
-  
+
     try {
-      await fileObject.mv(finalPath);
-      return {
-        status: 'success',
-        path: finalName,
-        error: null
-      }
+        await fileObject.mv(finalPath);
+        return {
+            status: 'success',
+            path: finalName,
+            error: null
+        }
     } catch (err) {
-      console.log(">>> check error: ", err);
-      return {
-        status: 'failed',
-        path: null,
-        error: JSON.stringify(err)
-      }
+        console.log(">>> check error: ", err);
+        return {
+            status: 'failed',
+            path: null,
+            error: JSON.stringify(err)
+        }
     }
-  };
+};
 module.exports = {
     getListSystem: async (req, res) => {
         try {
@@ -90,28 +90,28 @@ module.exports = {
     ,
     postSystem: async (req, res) => {
         try {
-          // Lấy dữ liệu text từ req.body
-          let newData = req.body;
-          
-          // Nếu có file ảnh được upload
-          if (req.files && req.files.image) {
-            let result = await uploadSingleFile(req.files.image);
-            if (result.status === 'success') {
-              // Lưu đường dẫn ảnh, ví dụ: "/images/imageUpload/tenfile-123456.jpg"
-              newData.image = "/images/imageUpload/" + result.path;
-            } else {
-              return res.status(500).json({ message: "Lỗi upload file", error: result.error });
+            // Lấy dữ liệu text từ req.body
+            let newData = req.body;
+
+            // Nếu có file ảnh được upload
+            if (req.files && req.files.image) {
+                let result = await uploadSingleFile(req.files.image);
+                if (result.status === 'success') {
+                    // Lưu đường dẫn ảnh, ví dụ: "/images/imageUpload/tenfile-123456.jpg"
+                    newData.image = "/images/imageUpload/" + result.path;
+                } else {
+                    return res.status(500).json({ message: "Lỗi upload file", error: result.error });
+                }
             }
-          }
-          
-          // Tạo hệ thống mới
-          const createdData = await System.create(newData);
-          res.status(201).json(createdData);
+
+            // Tạo hệ thống mới
+            const createdData = await System.create(newData);
+            res.status(201).json(createdData);
         } catch (err) {
-          console.error(err);
-          res.status(500).json({ message: 'Internal Server Error' });
+            console.error(err);
+            res.status(500).json({ message: 'Internal Server Error' });
         }
-      },
+    },
     putSystem: async (req, res) => {
 
         const SystemID = req.params.id;

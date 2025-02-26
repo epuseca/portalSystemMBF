@@ -106,8 +106,6 @@
             </div>
         </div>
 
-
-
         <table>
             <tr>
                 <th class="center-title-list-system">Tên</th>
@@ -131,7 +129,8 @@
                     </td>
                     <td>
                         <% if(system.image) { %>
-                            <img src="<%= system.image %>" alt="Ảnh hệ thống" style="max-width: 100px;">
+                            <img src="<%= system.image %>" alt="Ảnh hệ thống"
+                                style="height: 50px;width: 130px;object-fit: cover;">
                             <% } else { %>
                                 Không có ảnh
                                 <% } %>
@@ -392,12 +391,15 @@
 
     <!-- Danh sách tag nghiệp vụ -->
     <div id="listTagContainer" class="container" style="display: none;">
-        <h1>Danh sách tag nghiệp vụ</h1>
+        <div class="list-header">
+            <h1>Danh sách tag nghiệp vụ</h1>
+        </div>
         <table>
             <tr>
                 <th class="center-title-list-system">ID</th>
                 <th class="center-title-list-system">Name</th>
                 <th class="center-title-list-system">Description</th>
+                <th>Nút</th>
             </tr>
             <% tags.forEach(function(tag) { %>
                 <tr>
@@ -410,10 +412,18 @@
                     <td>
                         <%= tag.description %>
                     </td>
+                    <td>
+                        <button class="delete-btn" style="width:auto;" data-tagid="<%= tag._id %>"
+                            onclick="deleteTag(this)">
+                            Delete
+                        </button>
+                    </td>
+
                 </tr>
                 <% }); %>
         </table>
     </div>
+
 
     <script>
         document.getElementById("createSystemForm").addEventListener("submit", async function (event) {
@@ -582,6 +592,29 @@
         document.getElementById("selectImageBtn").addEventListener("click", function () {
             document.getElementById("imageInput").click();
         });
+        function deleteTag(button) {
+            // Lấy _id của tag từ thuộc tính data-tagid
+            var tagId = button.getAttribute("data-tagid");
+            if (confirm("Bạn có chắc muốn xóa tag này không?")) {
+                fetch(`/tag/${tagId}`, { method: "DELETE" })
+                    .then(response => {
+                        if (response.ok) {
+                            alert("Tag đã được xóa!");
+                            // Xóa phần tử <tr> chứa nút Delete này khỏi DOM
+                            var row = button.closest("tr");
+                            if (row) {
+                                row.remove();
+                            }
+                        } else {
+                            alert("Xóa tag thất bại!");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        alert("Có lỗi xảy ra khi xóa tag.");
+                    });
+            }
+        }
 
 
 
