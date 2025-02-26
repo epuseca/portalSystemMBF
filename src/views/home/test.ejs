@@ -260,7 +260,7 @@
                     <% listSystems.forEach(function(system) { %>
                         <% if(system.tagNv.some(function(t) { return t._id.toString()===tag._id.toString(); })) { %>
                             <a href="<%= system.linkAccess && system.linkAccess.trim() !== '' ? system.linkAccess : '/' %>"
-                                style="text-decoration: none; color: inherit;">
+                                target="_blank" style="text-decoration: none; color: inherit;">
 
                                 <div class="card_s" style="cursor: pointer;">
                                     <img src="<%= system.image || '/images/Tam-nhin.jpg' %>" alt="Image 5">

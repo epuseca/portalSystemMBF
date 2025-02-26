@@ -7,4 +7,5 @@ module.exports = {
     getRenderPic: (req, res) => {
         res.render('home/home.ejs');
     }
+    
 }

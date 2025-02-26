@@ -6,10 +6,13 @@ const configViewEngine = require('./config/viewEngine.js')
 const webRoutes = require('./routes/web.js')
 const connection = require('./config/database');
 const cookieParser = require('cookie-parser');
+const fileUpload = require('express-fileupload');
 
 const app = express() // tạo express application
 const port = process.env.PORT // init port
 const hostname = process.env.HOST_NAME  // init port
+
+app.use(fileUpload())
 
 app.use(cookieParser());
 

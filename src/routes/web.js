@@ -4,7 +4,7 @@ const middleware = require('../middleware/middleware')
 
 const { getHomePage, getRenderPic } = require('../controllers/homeController');
 const { loginUser, getMain, Login, Logout, getProfile, test } = require('../controllers/mainController')
-const { getListSystem, postSystem, putSystem, deteteSystem, searchSystem } = require('../controllers/systemController.js')
+const { getListSystem, postSystem, putSystem, deteteSystem, searchSystem, postUploadSingleFileApi } = require('../controllers/systemController.js')
 const { getListTag, postTag, putTag, deteteTag } = require('../controllers/tagController.js')
 const { getListUser, postUser, putUser, deteteUser } = require('../controllers/userController.js')
 
@@ -35,5 +35,8 @@ router.get('/tag', getListTag)
 router.post('/tag', postTag)
 router.put('/tag/:idTag', putTag)
 router.delete('/tag/:idTag', deteteTag)
+
+//File upload
+router.post('/file', postUploadSingleFileApi)
 
 module.exports = router;

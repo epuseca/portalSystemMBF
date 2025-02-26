@@ -69,8 +69,8 @@
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
-                <a id="showListSystem" href="#"><i class="fa fa-caret-right"></i>Danh sách hệ thống</a>
-                <a id="showCreateSystem" href="#"><i class="fa fa-caret-right"></i>Thêm hệ thống</a>
+                <a id="showListSystem" href="#listSystem"><i class="fa fa-caret-right"></i>Danh sách hệ thống</a>
+                <a id="showCreateSystem" href="#createSystem"><i class="fa fa-caret-right"></i>Thêm hệ thống</a>
             </div>
             <button class="dropdown-btn"> Tag nghiệp vụ
                 <i class="fa fa-caret-down"></i>
@@ -185,30 +185,38 @@
                 <% }); %>
         </table>
         <div class="pagination">
-            <% if (searchQuery && searchQuery.trim() !== "") { %>
-              
-              <% for (var i = 1; i <= totalPages; i++) { %>
-                <% if (i === currentPage) { %>
-                  <span class="current-page"><%= i %></span>
-                <% } else { %>
-                  <a href="/system/search?name=<%= encodeURIComponent(searchQuery) %>&page=<%= i %>"><%= i %></a>
-                <% } %>
-              <% } %>
-              
-            <% } else { %>
-              
-              <% for (var i = 1; i <= totalPages; i++) { %>
-                <% if (i === currentPage) { %>
-                  <span class="current-page"><%= i %></span>
-                <% } else { %>
-                  <a href="/system?page=<%= i %>"><%= i %></a>
-                <% } %>
-              <% } %>
-              
-            <% } %>
-          </div>
-          
-        
+            <% if (searchQuery && searchQuery.trim() !=="" ) { %>
+
+                <% for (var i=1; i <=totalPages; i++) { %>
+                    <% if (i===currentPage) { %>
+                        <span class="current-page">
+                            <%= i %>
+                        </span>
+                        <% } else { %>
+                            <a href="/system/search?name=<%= encodeURIComponent(searchQuery) %>&page=<%= i %>">
+                                <%= i %>
+                            </a>
+                            <% } %>
+                                <% } %>
+
+                                    <% } else { %>
+
+                                        <% for (var i=1; i <=totalPages; i++) { %>
+                                            <% if (i===currentPage) { %>
+                                                <span class="current-page">
+                                                    <%= i %>
+                                                </span>
+                                                <% } else { %>
+                                                    <a href="/system?page=<%= i %>">
+                                                        <%= i %>
+                                                    </a>
+                                                    <% } %>
+                                                        <% } %>
+
+                                                            <% } %>
+        </div>
+
+
     </div>
 
 
@@ -304,10 +312,11 @@
                 </div>
             </div>
 
+            <!-- Phần upload ảnh -->
             <div style="margin-right: 30px;">
-                <label for="image">Link ảnh</label>
-                <input type="text" id="image" name="image">
-
+                <label for="image">Chọn ảnh</label>
+                <!-- Input file để chọn ảnh; hiển thị sẵn -->
+                <input type="file" id="image" name="image" accept="image/*">
             </div>
             <div style="margin-right: 30px;">
                 <label for="description">Mô tả</label>
@@ -409,21 +418,20 @@
     <script>
         document.getElementById("createSystemForm").addEventListener("submit", async function (event) {
             event.preventDefault();
-
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
+            const formData = new FormData(this); // Lấy tất cả các field, bao gồm file
 
             try {
                 const response = await fetch("/system", {
                     method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(data)
+                    body: formData
+                    // Lưu ý: không cần thiết lập header "Content-Type" vì trình duyệt sẽ tự động thiết lập multipart/form-data cùng boundary
                 });
 
                 if (response.ok) {
                     alert("Tạo hệ thống mới thành công!");
-                    // this.reset();
-                    location.href = "/system";
+                    this.reset();
+                    // Bạn có thể reload trang hoặc điều hướng lại trang /system
+                    // location.href = "/system";
                 } else {
                     alert("Tạo hệ thống thất bại!!!!");
                 }
@@ -432,6 +440,7 @@
                 alert("An error occurred while creating the system.");
             }
         });
+
 
         //Drop btn
         var dropdown = document.getElementsByClassName("dropdown-btn");
@@ -463,15 +472,18 @@
         // Lắng nghe sự kiện click vào "Danh sách hệ thống"
         document.getElementById("showListSystem").addEventListener("click", function (event) {
             event.preventDefault();
+            location.href = "#listSystem";
             document.getElementById("listSystemContainer").style.display = "block";
             document.getElementById("createSystemContainer").style.display = "none";
             document.getElementById("listTagContainer").style.display = "none";
+
 
         });
 
         // Lắng nghe sự kiện click vào "Thêm hệ thống"
         document.getElementById("showCreateSystem").addEventListener("click", function (event) {
             event.preventDefault();
+            location.href = "#createSystem";
             document.getElementById("listSystemContainer").style.display = "none";
             document.getElementById("createSystemContainer").style.display = "block";
             document.getElementById("listTagContainer").style.display = "none";
@@ -481,6 +493,7 @@
         //Lắng nghe showListTag để bật Hiển thị hệ thống
         document.getElementById("showListTag").addEventListener("click", function (event) {
             event.preventDefault();
+            location.href = "#listTag";
             document.getElementById("listSystemContainer").style.display = "none";
             document.getElementById("createSystemContainer").style.display = "none";
             document.getElementById("listTagContainer").style.display = "block";
@@ -563,6 +576,15 @@
                     });
             }
         }
+
+        //upload image
+        // Khi bấm nút "Chọn ảnh", kích hoạt input file ẩn
+        document.getElementById("selectImageBtn").addEventListener("click", function () {
+            document.getElementById("imageInput").click();
+        });
+
+
+
     </script>
 </body>
 
