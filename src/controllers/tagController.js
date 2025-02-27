@@ -13,7 +13,7 @@ module.exports = {
     getListTag: async (req, res) => {
         try {
             let results = await Tag.find({});
-            console.log("Danh sách Tag:", results); // In ra toàn bộ thông tin của System
+            //console.log("Danh sách Tag:", results); // In ra toàn bộ thông tin của System
             // res.render('system/createSystem.ejs', { systems: results });
 
         } catch (err) {

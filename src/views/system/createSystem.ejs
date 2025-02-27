@@ -76,13 +76,11 @@
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
-
                 <a id="showListTag" href="#"> <i class="fa fa-caret-right"></i>Xem các tag nghiệp vụ</a>
                 <a id="showCreateTag" href="#"><i class="fa fa-caret-right"></i>Thêm tag nghiệp vụ</a>
             </div>
             <a href="#contact">Search</a>
         </div>
-
     </nav>
     <div id="mobileMenu" class="mobile-menu">
         <a href="#" class="closebtn" onclick="toggleMobileMenu()">&times;</a>
@@ -179,7 +177,6 @@
                             </button>
                         </div>
                     </td>
-
                 </tr>
                 <% }); %>
         </table>
@@ -214,23 +211,17 @@
 
                                                             <% } %>
         </div>
-
-
     </div>
-
-
-
 
     <!-- Modal Edit Form -->
     <div id="editModal" class="edit-modal">
         <form id="editForm" class="edit-modal-content edit-animate" action="/system/edit" method="post">
-            <div>
-                <span onclick="document.getElementById('editModal').style.display='none'" class="edit-close"
-                    title="Close Modal">&times;</span>
-            </div>
-
             <div class="edit-container">
-                <h1 style="margin-top: 10px;">Chỉnh sửa hệ thống</h1>
+                <div style=" position: relative;">
+                    <h1 style="margin-top: 10px;">Chỉnh sửa hệ thống</h1>
+                    <span onclick="document.getElementById('editModal').style.display='none'" class="edit-close"
+                        title="Close Modal">&times;</span>
+                </div>
 
                 <!-- Trường ẩn lưu _id của hệ thống (MongoDB _id) -->
                 <input type="hidden" id="_id" name="_id">
@@ -291,7 +282,6 @@
                 <!-- <button type="button" onclick="document.getElementById('editModal').style.display='none'"
                     class="edit-cancelbtn">Hủy</button> -->
             </div>
-
         </form>
     </div>
 
@@ -448,14 +438,13 @@
             const table = document.getElementById("tagTable");
             // Xóa hết các dòng cũ (trừ dòng header)
             table.innerHTML = `
-    <tr>
-      <th class="center-title-list-system">ID</th>
-      <th class="center-title-list-system">Name</th>
-      <th class="center-title-list-system">Description</th>
-      <th>Nút</th>
-    </tr>
-  `;
-
+                <tr>
+                <th class="center-title-list-system">ID</th>
+                <th class="center-title-list-system">Name</th>
+                <th class="center-title-list-system">Description</th>
+                <th>Nút</th>
+                </tr>
+    `;
             tags.forEach(tag => {
                 const tr = document.createElement("tr");
 
@@ -500,32 +489,6 @@
                 alert("Có lỗi xảy ra khi làm mới danh sách tag.");
             }
         });
-
-        // Create system js
-        document.getElementById("createSystemForm").addEventListener("submit", async function (event) {
-            event.preventDefault();
-            const formData = new FormData(this); // Lấy tất cả các field, bao gồm file
-
-            try {
-                const response = await fetch("/system", {
-                    method: "POST",
-                    body: formData
-                    // Lưu ý: không cần thiết lập header "Content-Type" vì trình duyệt sẽ tự động thiết lập multipart/form-data cùng boundary
-                });
-
-                if (response.ok) {
-                    alert("Tạo hệ thống mới thành công!");
-                    this.reset();
-                    // Bạn có thể reload trang hoặc điều hướng lại trang /system
-                    // location.href = "/system";
-                } else {
-                    alert("Tạo hệ thống thất bại!!!!");
-                }
-            } catch (error) {
-                console.error("Error:", error);
-                alert("An error occurred while creating the system.");
-            }
-        });
         // Create tag js
         document.getElementById("createTagForm").addEventListener("submit", async function (event) {
             event.preventDefault();
@@ -552,6 +515,33 @@
             }
         });
 
+        // Create system js
+        document.getElementById("createSystemForm").addEventListener("submit", async function (event) {
+            event.preventDefault();
+            const formData = new FormData(this); // Lấy tất cả các field, bao gồm file
+
+            try {
+                const response = await fetch("/system", {
+                    method: "POST",
+                    body: formData
+                    // Lưu ý: không cần thiết lập header "Content-Type" vì trình duyệt sẽ tự động thiết lập multipart/form-data cùng boundary
+                });
+
+                if (response.ok) {
+                    alert("Tạo hệ thống mới thành công!");
+                    this.reset();
+
+                    // Bạn có thể reload trang hoặc điều hướng lại trang /system
+                    // location.href = "/system";
+                } else {
+                    alert("Tạo hệ thống thất bại!!!!");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("An error occurred while creating the system.");
+            }
+        });
+
         //Drop btn
         var dropdown = document.getElementsByClassName("dropdown-btn");
 
@@ -567,6 +557,17 @@
                 }
             });
         }
+        //auto mở dropdown-btn, nếu muốn tắt thì xóa bỏ cái này
+        window.addEventListener("DOMContentLoaded", function () {
+            const dropdownButtons = document.querySelectorAll(".dropdown-btn");
+            dropdownButtons.forEach(btn => {
+                btn.classList.add("active");
+                const content = btn.nextElementSibling;
+                if (content) {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        });
 
 
         // Lấy phần tử modal edit form
@@ -587,8 +588,7 @@
             document.getElementById("createSystemContainer").style.display = "none";
             document.getElementById("createTagContainer").style.display = "none";
             document.getElementById("listTagContainer").style.display = "none";
-
-
+            location.reload();
         });
 
         // Lắng nghe sự kiện click vào "Thêm hệ thống"
@@ -599,19 +599,30 @@
             document.getElementById("createSystemContainer").style.display = "block";
             document.getElementById("createTagContainer").style.display = "none";
             document.getElementById("listTagContainer").style.display = "none";
-
         });
 
         //Lắng nghe showListTag để bật Hiển thị hệ thống
-        document.getElementById("showListTag").addEventListener("click", function (event) {
+        document.getElementById("showListTag").addEventListener("click", async function (event) {
             event.preventDefault();
-            location.href = "#listTag";
+            // Ẩn các container khác và hiện container danh sách tag
             document.getElementById("listSystemContainer").style.display = "none";
             document.getElementById("createSystemContainer").style.display = "none";
-            document.getElementById("listTagContainer").style.display = "block";
             document.getElementById("createTagContainer").style.display = "none";
-
+            document.getElementById("listTagContainer").style.display = "block";
+            try {
+                const response = await fetch("/tag/api");
+                if (response.ok) {
+                    const tags = await response.json();
+                    updateTagTable(tags);
+                } else {
+                    alert("Không thể lấy danh sách tag!");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Có lỗi xảy ra khi lấy danh sách tag.");
+            }
         });
+
         //Lắng nghe showListTag để bật Hiển thị hệ thống
         document.getElementById("showCreateTag").addEventListener("click", function (event) {
             event.preventDefault();
@@ -621,7 +632,6 @@
             document.getElementById("listTagContainer").style.display = "none";
             document.getElementById("createTagContainer").style.display = "block";
         });
-
         function openEditModal(button) {
             // Lấy dữ liệu từ thuộc tính data của nút Edit
             var systemId = button.getAttribute("data-systemid");
@@ -663,7 +673,6 @@
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(data)
-
                 });
 
                 if (response.ok) {
@@ -728,8 +737,6 @@
                     });
             }
         }
-
-
 
     </script>
 </body>
