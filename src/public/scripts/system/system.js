@@ -26,12 +26,12 @@ function openTagModal(target) {
     currentTagTarget = target;
     if (target === "edit") {
         var selected = document.getElementById('editTagNv').value.split(',').map(s => s.trim()).filter(s => s !== "");
-        document.querySelectorAll('.tag-checkbox').forEach(function(cb) {
+        document.querySelectorAll('.tag-checkbox').forEach(function (cb) {
             cb.checked = selected.indexOf(cb.value) !== -1;
         });
     } else {
         // Nếu là create, reset tất cả checkbox
-        document.querySelectorAll('.tag-checkbox').forEach(function(cb) {
+        document.querySelectorAll('.tag-checkbox').forEach(function (cb) {
             cb.checked = false;
         });
     }
@@ -49,7 +49,7 @@ function confirmTagSelection() {
     const checkboxes = document.querySelectorAll('.tag-checkbox');
     let selectedTagIds = [];
     let selectedTagNames = [];
-    checkboxes.forEach(function(checkbox) {
+    checkboxes.forEach(function (checkbox) {
         if (checkbox.checked) {
             selectedTagIds.push(checkbox.value);
             const label = document.querySelector('label[for="' + checkbox.id + '"]');
@@ -70,7 +70,7 @@ function confirmTagSelection() {
 }
 
 // Khi người dùng click bên ngoài modal, đóng modal
-window.onclick = function(event) {
+window.onclick = function (event) {
     var tagModal = document.getElementById('tagModal');
     if (event.target == tagModal) {
         tagModal.style.display = "none";
