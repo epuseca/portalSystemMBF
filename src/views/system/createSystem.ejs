@@ -387,16 +387,16 @@
         </div>
         <table id="tagTable">
             <tr>
-                <th class="center-title-list-system">ID</th>
-                <th class="center-title-list-system">Name</th>
-                <th class="center-title-list-system">Description</th>
+                <!-- <th class="center-title-list-system">ID</th> -->
+                <th class="center-title-list-system">Tên tag</th>
+                <th class="center-title-list-system">Mô tả</th>
                 <th>Nút</th>
             </tr>
             <% tags.forEach(function(tag) { %>
                 <tr>
-                    <td>
+                    <!-- <td>
                         <%= tag._id %>
-                    </td>
+                    </td> -->
                     <td>
                         <%= tag.name %>
                     </td>
@@ -437,20 +437,22 @@
         function updateTagTable(tags) {
             const table = document.getElementById("tagTable");
             // Xóa hết các dòng cũ (trừ dòng header)
+            // dòng ở dưới nếu thêm id
+            // <th class="center-title-list-system">ID</th>
+
             table.innerHTML = `
                 <tr>
-                <th class="center-title-list-system">ID</th>
-                <th class="center-title-list-system">Name</th>
-                <th class="center-title-list-system">Description</th>
+                <th class="center-title-list-system">Tên tag</th>
+                <th class="center-title-list-system">Mô tả</th>
                 <th>Nút</th>
                 </tr>
     `;
             tags.forEach(tag => {
                 const tr = document.createElement("tr");
 
-                const tdId = document.createElement("td");
-                tdId.textContent = tag._id;
-                tr.appendChild(tdId);
+                // const tdId = document.createElement("td");
+                // tdId.textContent = tag._id;
+                // tr.appendChild(tdId);
 
                 const tdName = document.createElement("td");
                 tdName.textContent = tag.name;
@@ -711,9 +713,10 @@
 
         //upload image
         // Khi bấm nút "Chọn ảnh", kích hoạt input file ẩn
-        document.getElementById("selectImageBtn").addEventListener("click", function () {
-            document.getElementById("imageInput").click();
-        });
+        // document.getElementById("selectImageBtn").addEventListener("click", function () {
+        //     document.getElementById("imageInput").click();
+        // });
+
         function deleteTag(button) {
             // Lấy _id của tag từ thuộc tính data-tagid
             var tagId = button.getAttribute("data-tagid");
