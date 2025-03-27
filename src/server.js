@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 const fileUpload = require('express-fileupload');
 
 const app = express() // tạo express application
-const port = process.env.PORT || 10000  // init port
+const port = process.env.PORT || 3000  // init port
 const hostname = process.env.HOST_NAME  // init port
 
 app.use(fileUpload())
@@ -22,8 +22,6 @@ app.use(express.urlencoded({ extended: true }));
 configViewEngine(app);
 
 app.use('/', webRoutes);
-
-
 
 (async () => {
     try {

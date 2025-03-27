@@ -41,7 +41,8 @@
   height: 80px;
 }
 .logo img {
-    max-height: 50px;
+    height: 64px;
+    /* width: 100px; */
 }
 
 .hamburger {
