@@ -107,7 +107,7 @@
         <table>
             <tr>
                 <th class="center-title-list-system">Tên</th>
-                <th class="center-title-list-system">ID</th>
+                <th class="center-title-list-system" style="display: none;">ID</th>
                 <th class="center-title-list-system">Ảnh</th>
                 <th class="center-title-list-system">Mô tả</th>
                 <th class="center-title-list-system">Tag nghiệp vụ</th>
@@ -122,13 +122,13 @@
                     <td>
                         <%= system.name %>
                     </td>
-                    <td>
+                    <td style="display: none;">
                         <%= system.idSystem %>
                     </td>
-                    <td>
+                    <td style="padding: 0px;">
                         <% if(system.image) { %>
                             <img src="<%= system.image %>" alt="Ảnh hệ thống"
-                                style="height: 50px;width: 130px;object-fit: cover;">
+                                style="height: 60px;width: 122px;object-fit: cover;">
                             <% } else { %>
                                 Không có ảnh
                                 <% } %>
@@ -136,7 +136,7 @@
                     <td>
                         <%= system.description %>
                     </td>
-                    <td>
+                    <td class="tag-nghiep-vu">
                         <% if(system.tagNv && system.tagNv.length> 0) { %>
                             <% system.tagNv.forEach(function(tag, index) { %>
                                 <%= tag.name %>
@@ -235,7 +235,7 @@
                     </div>
                     <div class="edit-col">
                         <label for="idSystem"><b>ID hệ thống</b></label>
-                        <input type="text" placeholder="Nhập ID hệ thống" name="idSystem" id="idSystem" required>
+                        <input type="text" placeholder="Nhập ID hệ thống" name="idSystem" id="idSystem">
                     </div>
                 </div>
 
@@ -297,7 +297,7 @@
                 </div>
                 <div class="edit-col" style="margin-right: 30px;">
                     <label for="idSystem">ID hệ thống</label>
-                    <input type="text" id="idSystem" name="idSystem" required>
+                    <input type="text" id="idSystem" name="idSystem">
                 </div>
             </div>
 

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/home/topnav_slideshow.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="/scripts/sidebar.js"></script>
+    <script src="/scripts/main.js"></script>
     <script src="/scripts/navbar.js"></script>
     <style>
         /* Reset mặc định */
@@ -69,7 +70,7 @@
 
         /* Phần nội dung (section) */
         .section {
-            margin: 20px;
+            margin: 10px;
             background-color: #fff;
             padding: 20px;
             border-radius: 5px;
@@ -80,12 +81,24 @@
             font-size: 1.4rem;
         }
 
-        /* Dãy ảnh (tối đa 4 ảnh) */
-        .image-row {
+        .slider-container {
+            position: relative;
             display: flex;
+            align-items: center;
+        }
+
+        .image-row {
+            /* margin-left: 40px; */
+            display: flex;
+            height: 210px;
             gap: 10px;
-            overflow-x: auto;
-            /* Cho phép cuộn ngang nếu nhiều ảnh */
+            overflow-x: hidden;
+            /* Ẩn thanh cuộn */
+            scroll-behavior: smooth;
+            /* Hiệu ứng trượt mượt */
+            width: 100%;
+            /* Điều chỉnh để vừa với bố cục */
+            white-space: nowrap;
         }
 
         .image-row img {
@@ -113,16 +126,50 @@
             transform: scale(1.03);
         }
 
-        .card_s img:hover {
-            /* width: 206px;
-            height: 94px;
+        .slide-button {
+            position: absolute;
+            color: #2b7dcf;
+            background-color: #2b7dcf00;
+            cursor: pointer;
+            font-size: 25px;
+            width: 40px;
+            height: 205px;
+            padding: 5px;
+            margin: 0;
+            z-index: 10;
+        }
 
-            transition: 0.3s; */
+        .slide-button.left {
+            left: -30px;
+            padding-left: 10px;
+            padding-right: 60px;
+        }
+
+        .slide-button.right {
+            right: -30px;
+            padding-right: 20px;
+            padding-left: 60px;
+        }
+
+        .slide-button:hover {
+            color: rgb(255, 255, 255);
+            /* background-color: #2b7dcfc6; */
+        }
+
+        .slide-button.left:hover {
+            left: -30px;
+            background: linear-gradient(to left, rgba(255, 255, 255, 0), #2b7dcfc6);
+        }
+
+        .slide-button.right:hover {
+            right: -30px;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0), #2b7dcfc6);
+
         }
     </style>
 </head>
 
-<body>
+<body data-success="<%= messages.success %>" data-error="<%= messages.error %>" data-logout="<%= messages.logout %>">
 
     <!-- Thanh topnav -->
     <!-- topbar -->
@@ -268,37 +315,49 @@
                 <h2 style="cursor: pointer;">
                     <%= tag.name %> >
                 </h2>
-                <div class="image-row">
-                    <% listSystems.forEach(function(system) { %>
-                        <% if(system.tagNv.some(function(t) { return t._id.toString()===tag._id.toString(); })) { %>
-                            <a href="<%= system.linkAccess && system.linkAccess.trim() !== '' ? system.linkAccess : '/' %>"
-                                target="_blank" style="text-decoration: none; color: inherit;">
-
-                                <div class="card_s" style="cursor: pointer;">
-                                    <img src="<%= system.image || '/images/Tam-nhin.jpg' %>" alt="Image 5">
-                                    <p class="small-text">Hệ thống: <%= system.name %>
-                                    </p>
-                                    <p class="small-text">Link: <%= system.linkAccess %>
-                                    </p>
-                                    <!-- <p class="small-text">
-                                        Tag nghiệp vụ:
-                                        <% system.tagNv.forEach(function(tag, index) { %>
-                                            <%= tag.name %>
-                                                <%= index < system.tagNv.length - 1 ? ', ' : '' %>
-                                                    <% }); %>
-                                    </p> -->
-                                    <p class="small-text">Đầu mối quản trị: <%= system.contactPoint %>
-                                    </p>
-                                </div>
-                            </a>
-                            <% } %>
-                                <% }); %>
+                <div class="slider-container">
+                    <button class="slide-button left">&lt;</button>
+                    <div class="image-row">
+                        <% listSystems.forEach(function(system) { %>
+                            <% if(system.tagNv.some(function(t) { return t._id.toString()===tag._id.toString(); })) { %>
+                                <a href="<%= system.linkAccess && system.linkAccess.trim() !== '' ? system.linkAccess : '/' %>"
+                                    target="_blank" style="text-decoration: none; color: inherit;">
+                                    <div class="card_s">
+                                        <img src="<%= system.image || '/images/logo1.png' %>" alt="Image 5">
+                                        <p class="small-text">Hệ thống: <%= system.name %>
+                                        </p>
+                                        <p class="small-text">Link: <%= system.linkAccess %>
+                                        </p>
+                                        <p class="small-text">Đầu mối quản trị: <%= system.contactPoint %>
+                                        </p>
+                                    </div>
+                                </a>
+                                <% } %>
+                                    <% }); %>
+                    </div>
+                    <button class="slide-button right">&gt;</button>
                 </div>
             </div>
+
             <% }); %>
                 <% } else { %>
                     <p>Chưa có hệ thống nào.</p>
                     <% } %>
 </body>
+<script>
+    document.querySelectorAll('.slider-container').forEach(container => {
+        const row = container.querySelector('.image-row');
+        const btnLeft = container.querySelector('.slide-button.left');
+        const btnRight = container.querySelector('.slide-button.right');
+
+        btnLeft.addEventListener('click', () => {
+            row.scrollBy({ left: -600, behavior: 'smooth' }); // Trượt sang trái 200px
+        });
+
+        btnRight.addEventListener('click', () => {
+            row.scrollBy({ left: 600, behavior: 'smooth' }); // Trượt sang phải 200px
+        });
+    });
+</script>
 
 </html>

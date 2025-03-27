@@ -18,11 +18,11 @@ router.post('/login', loginUser); //check login
 router.get('/logout', Logout); //clear token
 
 //System
-router.get('/system', middleware.verifyToken, getListSystem)
-router.get('/system/search', searchSystem);
-router.post('/system', postSystem)
-router.put('/system/:id', putSystem)
-router.delete('/system/:idSystem', deteteSystem)
+router.get('/system', middleware.verifyToken, middleware.roleAdmin, getListSystem)
+router.get('/system/search', middleware.verifyToken, middleware.roleAdmin, searchSystem);
+router.post('/system', middleware.verifyToken, middleware.roleAdmin, postSystem)
+router.put('/system/:id', middleware.verifyToken, middleware.roleAdmin, putSystem)
+router.delete('/system/:idSystem', middleware.verifyToken, middleware.roleAdmin, deteteSystem)
 
 //người dùng
 router.get('/user', getListUser)

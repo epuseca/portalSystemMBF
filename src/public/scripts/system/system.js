@@ -5,16 +5,18 @@ window.onscroll = function () {
     var currentScrollPos = window.pageYOffset;
     var navbar = document.getElementById("navbar");
     var sidenav = document.getElementById("sidenav");
-
+    var listcontainer = document.getElementById("listSystemContainer");
     // Khi cuộn lên
     if (prevScrollpos > currentScrollPos) {
         navbar.style.top = "0";
         // Đặt sidenav ở vị trí phù hợp bên dưới navbar, ví dụ 68px
         sidenav.style.top = "0px";
+        listcontainer.style.top = "0px";
     } else {
         // Khi cuộn xuống, ẩn navbar và sidenav
         navbar.style.top = "-64px";
         sidenav.style.top = "-64px";
+        listcontainer.style.top = "-64px";
     }
     prevScrollpos = currentScrollPos;
 }

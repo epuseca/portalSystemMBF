@@ -25,7 +25,7 @@ module.exports = {
             listSystems: listSystems,
             listTags: listTags,
             isLoggedIn: isLoggedIn,
-            user: user
+            user: user,
         });
     },
     Login: async (req, res) => {
@@ -50,6 +50,7 @@ module.exports = {
     },
     Logout: async (req, res) => {
         res.clearCookie('token');
+        req.flash('logout', 'Đăng xuất thành công!');
         res.redirect('/');
     },
     loginUser: async (req, res) => {
@@ -58,13 +59,14 @@ module.exports = {
         const user = await User.findOne({ username: username });
 
         if (!user) {
-            // Bạn có thể hiển thị thông báo lỗi trên giao diện
-            return res.status(401).render('home/home.ejs', { error: 'User not found' });
+            req.flash('error', 'Invalid password');
+            return res.redirect('/');
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
-            return res.status(401).render('home/home.ejs', { error: 'Invalid password' });
+            req.flash('error', 'Invalid password');
+            return res.redirect('/');
         }
 
         const token = jwt.sign({
@@ -84,6 +86,7 @@ module.exports = {
         // Đặt cookie chứa token
         res.cookie('token', token, { httpOnly: true });
         // Redirect về trang chủ sau khi đăng nhập thành công
+        req.flash('success', 'Đăng nhập thành công!');
         return res.redirect('/');
     },
 

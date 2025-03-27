@@ -3,15 +3,7 @@ body {
     background-color: #f2f2f241;
 }
 
-.container {
-    width: 75%;
-    margin: 10px 0 0 auto;
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px 0px #ccc;
-    margin-top: 68px;
-}
+
 
 input,
 select,
@@ -51,7 +43,15 @@ button:hover {
 .active_navbar {
     font-weight: bold;
 }
-
+.container {
+    width: 75%;
+    margin: 10px 0 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px #ccc;
+    margin-top: 68px;
+}
 .sidenav {
     margin-top: 68px;
     margin-left: 8px;
@@ -127,7 +127,7 @@ button:hover {
     margin-right: 20px;
 }
 
-table,
+/* table,
 td,
 th {
     border: 1px solid #ddd;
@@ -145,6 +145,43 @@ table {
 th,
 td {
     padding: 8px;
+} */
+
+table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+th, td {
+    font-size: 12px; 
+    padding: 8px;
+    border: 1px solid #ddd;
+    height: 60px; /* Giữ chiều cao cố định */
+    max-height: 60px;
+    overflow: hidden;
+    vertical-align: middle; /* Căn giữa nội dung theo chiều dọc */
+}
+td{
+    white-space: nowrap; /* Ngăn nội dung xuống dòng */
+    }
+td.tag-nghiep-vu {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; /* Giới hạn tối đa 3 dòng */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal; /* Cho phép xuống dòng */
+    max-height: 60px; /* Giới hạn chiều cao */
+    line-height: 22px; /* Điều chỉnh khoảng cách dòng */
+}
+
+td .action-buttons button {
+    flex: 1; /* Để nút tự co dãn theo kích thước */
+    width: 100%;
+    font-size: 13px;
+    padding: 8px;
+    align-items: center;
 }
 
 .edit-btn {
@@ -166,6 +203,7 @@ td {
 
 .center-title-list-system {
     text-align: center;
+    font-size: 14px;
 }
 
 /* CSS cho Modal Edit Form */
@@ -299,13 +337,6 @@ td {
 
 .delete-btn:hover {
     background-color: #2b7dcf;
-}
-
-.action-buttons {
-    display: flex;
-    gap: 10px;
-    /* Khoảng cách giữa 2 nút */
-    align-items: center;
 }
 
 .chosse-tag-create {

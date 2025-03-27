@@ -30,7 +30,7 @@ module.exports = {
     getListSystem: async (req, res) => {
         try {
             let page = parseInt(req.query.page) || 1;
-            let limit = 6; // mỗi trang 6 dòng
+            let limit = 7; // mỗi trang 6 dòng
             let skip = (page - 1) * limit;
 
             let systems = await System.find({})
@@ -61,7 +61,7 @@ module.exports = {
         try {
             const searchQuery = req.query.name || "";
             let page = parseInt(req.query.page) || 1;
-            let limit = 6; // mỗi trang 6 dòng
+            let limit = 7; // mỗi trang 6 dòng
             let skip = (page - 1) * limit;
 
             // Lấy danh sách hệ thống thỏa mãn điều kiện tìm kiếm
