@@ -14,7 +14,7 @@ const systemSchema = new mongoose.Schema(
                 ref: 'tag'
             }],
             default: [],
-            set: function(v) {
+            set: function (v) {
                 if (typeof v === 'string') {
                     // Loại bỏ dấu ngoặc vuông và dấu nháy, sau đó tách theo dấu phẩy
                     v = v.replace(/[\[\]']+/g, ""); // Loại bỏ [ , ] và '

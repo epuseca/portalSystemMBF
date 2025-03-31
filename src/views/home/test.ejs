@@ -12,161 +12,7 @@
     <script src="/scripts/sidebar.js"></script>
     <script src="/scripts/main.js"></script>
     <script src="/scripts/navbar.js"></script>
-    <style>
-        /* Reset mặc định */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
 
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-        }
-
-        /* Thanh topnav */
-        .topnav {
-            width: 100%;
-            background-color: #333;
-            color: #fff;
-            padding: 10px 20px;
-        }
-
-        .topnav ul {
-            display: flex;
-            list-style-type: none;
-            align-items: center;
-        }
-
-        .topnav li {
-            margin-right: 20px;
-        }
-
-        .topnav a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .topnav a:hover {
-            text-decoration: underline;
-        }
-
-        /* Ảnh đầu trang (banner) */
-        .top-image {
-            width: 100%;
-            overflow: hidden;
-            /* Ẩn phần ảnh vượt quá */
-        }
-
-        .top-image img {
-            width: 100%;
-            /* Giới hạn chiều cao tối đa, tùy chỉnh theo ý muốn */
-            max-height: 500px;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* Phần nội dung (section) */
-        .section {
-            margin: 10px;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-        }
-
-        .section h2 {
-            margin-bottom: 15px;
-            font-size: 1.4rem;
-        }
-
-        .slider-container {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .image-row {
-            /* margin-left: 40px; */
-            display: flex;
-            height: 210px;
-            gap: 10px;
-            overflow-x: hidden;
-            /* Ẩn thanh cuộn */
-            scroll-behavior: smooth;
-            /* Hiệu ứng trượt mượt */
-            width: 100%;
-            /* Điều chỉnh để vừa với bố cục */
-            white-space: nowrap;
-        }
-
-        .image-row img {
-            width: 200px;
-            height: 91px;
-            border-radius: 5px;
-            object-fit: cover;
-        }
-
-        /* Đoạn mô tả nhỏ */
-        .small-text {
-            margin-top: 10px;
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        .card_s {
-            width: 200px;
-            padding: 2px;
-            margin-right: 15px;
-        }
-
-        .card_s:hover {
-            transition: 0.3s;
-            transform: scale(1.03);
-        }
-
-        .slide-button {
-            position: absolute;
-            color: #2b7dcf;
-            background-color: #2b7dcf00;
-            cursor: pointer;
-            font-size: 25px;
-            width: 40px;
-            height: 205px;
-            padding: 5px;
-            margin: 0;
-            z-index: 10;
-        }
-
-        .slide-button.left {
-            left: -30px;
-            padding-left: 10px;
-            padding-right: 60px;
-        }
-
-        .slide-button.right {
-            right: -30px;
-            padding-right: 20px;
-            padding-left: 60px;
-        }
-
-        .slide-button:hover {
-            color: rgb(255, 255, 255);
-            /* background-color: #2b7dcfc6; */
-        }
-
-        .slide-button.left:hover {
-            left: -30px;
-            background: linear-gradient(to left, rgba(255, 255, 255, 0), #2b7dcfc6);
-        }
-
-        .slide-button.right:hover {
-            right: -30px;
-            background: linear-gradient(to right, rgba(255, 255, 255, 0), #2b7dcfc6);
-
-        }
-    </style>
 </head>
 
 <body data-success="<%= messages.success %>" data-error="<%= messages.error %>" data-logout="<%= messages.logout %>">
@@ -316,7 +162,7 @@
                     <%= tag.name %> >
                 </h2>
                 <div class="slider-container">
-                    <button class="slide-button left">&lt;</button>
+                    <button class="slide-button left">&#10094;</button>
                     <div class="image-row">
                         <% listSystems.forEach(function(system) { %>
                             <% if(system.tagNv.some(function(t) { return t._id.toString()===tag._id.toString(); })) { %>
@@ -324,19 +170,28 @@
                                     target="_blank" style="text-decoration: none; color: inherit;">
                                     <div class="card_s">
                                         <img src="<%= system.image || '/images/logo1.png' %>" alt="Image 5">
-                                        <p class="small-text">Hệ thống: <%= system.name %>
+                                        <p style="font-weight: bold;" class="small-text">Hệ thống: <%= system.name %>
                                         </p>
-                                        <p class="small-text">Link: <%= system.linkAccess %>
+                                        <p class="small-text">Link truy cập: <%= system.linkAccess %>
+                                        </p>
+                                        <p class="small-text">Đơn vị chủ quản: <%= system.managingUnit %>
                                         </p>
                                         <p class="small-text">Đầu mối quản trị: <%= system.contactPoint %>
                                         </p>
-                                    </div>
+                                        <a target="_blank" class="small-text"
+                                            style="text-decoration: underline; color: inherit;"
+                                            href="<%= system.linkInstruct %>" onmouseover="this.style.color='#007bff'"
+                                            onmouseout="this.style.color='inherit'">
+                                            Link tài liệu tham khảo: <%= system.linkInstruct %>
+                                        </a>
                                 </a>
-                                <% } %>
-                                    <% }); %>
                     </div>
-                    <button class="slide-button right">&gt;</button>
+                    </a>
+                    <% } %>
+                        <% }); %>
                 </div>
+                <button class="slide-button right">&#10095;</button>
+            </div>
             </div>
 
             <% }); %>
